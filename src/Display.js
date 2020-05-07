@@ -24,8 +24,12 @@ const Display = (() => {
 
     function renderNumbers(board) {
         let cells = [...document.querySelectorAll(".small-grid-box")];
-        for (let i = 0; i < 81; i++) {
-            cells[i].firstChild.innerText = board[i];
+        let n = 0;
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                cells[n].firstChild.innerText = board[i][j];
+                n++;
+            }
         }
     }
     

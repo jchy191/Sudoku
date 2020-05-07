@@ -2,15 +2,15 @@ const Puzzle = (() => {
 
     function createPuzzle() {
         const _seed = [
-        9, 5, 7, 6, 1, 3, 2, 8, 4,
-        4, 8, 3, 2, 5, 7, 1, 9, 6,
-        6, 1, 2, 8, 4, 9, 5, 3, 7,
-        1, 7, 8, 3, 6, 4, 9, 5, 2,
-        5, 2, 4, 9, 7, 1, 3, 6, 8,
-        3, 6, 9, 5, 2, 8, 7, 4, 1,
-        8, 4, 5, 7, 9, 2, 6, 1, 3,
-        2, 9, 1, 4, 3, 6, 8, 7, 5,
-        7, 3, 6, 1, 8, 5, 4, 2, 9
+        [9, 5, 7, 6, 1, 3, 2, 8, 4],
+        [4, 8, 3, 2, 5, 7, 1, 9, 6],
+        [6, 1, 2, 8, 4, 9, 5, 3, 7],
+        [1, 7, 8, 3, 6, 4, 9, 5, 2],
+        [5, 2, 4, 9, 7, 1, 3, 6, 8],
+        [3, 6, 9, 5, 2, 8, 7, 4, 1],
+        [8, 4, 5, 7, 9, 2, 6, 1, 3],
+        [2, 9, 1, 4, 3, 6, 8, 7, 5],
+        [7, 3, 6, 1, 8, 5, 4, 2, 9]
         ];
         
         let board = [];
@@ -18,68 +18,36 @@ const Puzzle = (() => {
         board = _randomiseRows(board);
         board = _randomiseBigColumns(board);
         board = _randomiseBigRows(board);
-
         return board;
     }
 
     function _randomiseColumns(board) {
-        let newBoard = [];
+        let newBoard = [[],[],[],[],[],[],[],[],[]];
 
-        let column1 = board.filter((v, i) => i % 9 == 0 );
-        let column2 = board.filter((v, i) => i % 9 == 1 );
-        let column3 = board.filter((v, i) => i % 9 == 2 );
-        let column4 = board.filter((v, i) => i % 9 == 3 );
-        let column5 = board.filter((v, i) => i % 9 == 4 );
-        let column6 = board.filter((v, i) => i % 9 == 5 );
-        let column7 = board.filter((v, i) => i % 9 == 6 );
-        let column8 = board.filter((v, i) => i % 9 == 7 );
-        let column9 = board.filter((v, i) => i % 9 == 8 );
+        let column1 = board.map(x => x.reduce((a, v, i) => (i == 0) ? v : a, 0));
+        let column2 = board.map(x => x.reduce((a, v, i) => (i == 1) ? v : a, 0));
+        let column3 = board.map(x => x.reduce((a, v, i) => (i == 2) ? v : a, 0));
+        let column4 = board.map(x => x.reduce((a, v, i) => (i == 3) ? v : a, 0)); 
+        let column5 = board.map(x => x.reduce((a, v, i) => (i == 4) ? v : a, 0)); 
+        let column6 = board.map(x => x.reduce((a, v, i) => (i == 5) ? v : a, 0));
+        let column7 = board.map(x => x.reduce((a, v, i) => (i == 6) ? v : a, 0));
+        let column8 = board.map(x => x.reduce((a, v, i) => (i == 7) ? v : a, 0));
+        let column9 = board.map(x => x.reduce((a, v, i) => (i == 8) ? v : a, 0));
 
-        let [a, b, c] = _randomiser(column1, column2, column3);
-        column1 = a;
-        column2 = b;
-        column3 = c;
+        let [c1, c2, c3] = _randomiser(column1, column2, column3);
+        let [c4, c5, c6] = _randomiser(column4, column5, column6);
+        let [c7, c8, c9] = _randomiser(column7, column8, column9);
 
-        let [d, e, f] = _randomiser(column4, column5, column6);
-        column4 = d;
-        column5 = e;
-        column6 = f;
-
-        let [g, h, i] = _randomiser(column7, column8, column9);
-        column7 = g;
-        column8 = h;
-        column9 = i;
-
-        for (let n = 0; n < 81; n++) {
-            switch (n % 9) {
-                case 0: 
-                    newBoard[n] = column1.shift();
-                    break;
-                case 1: 
-                    newBoard[n] = column2.shift();
-                    break;
-                case 2: 
-                    newBoard[n] = column3.shift();
-                    break;
-                case 3: 
-                    newBoard[n] = column4.shift();
-                    break;
-                case 4: 
-                    newBoard[n] = column5.shift();
-                    break;                
-                case 5: 
-                    newBoard[n] = column6.shift();
-                    break;
-                case 6: 
-                    newBoard[n] = column7.shift();
-                    break;
-                case 7: 
-                    newBoard[n] = column8.shift();
-                    break;
-                case 8: 
-                    newBoard[n] = column9.shift();
-                    break;
-            }
+        for (let n = 0; n < 9; n++) {
+            newBoard[n].push(c1.shift());
+            newBoard[n].push(c2.shift());
+            newBoard[n].push(c3.shift());
+            newBoard[n].push(c4.shift());
+            newBoard[n].push(c5.shift());
+            newBoard[n].push(c6.shift());
+            newBoard[n].push(c7.shift());
+            newBoard[n].push(c8.shift());
+            newBoard[n].push(c9.shift());
         }
         return newBoard;
     }
@@ -87,139 +55,72 @@ const Puzzle = (() => {
     function _randomiseRows(board) {
         let newBoard = [];
 
-        let row1 = board.filter((v, i) => i >= 0 && i <= 8);
-        let row2 = board.filter((v, i) => i >= 9 && i <= 17);
-        let row3 = board.filter((v, i) => i >= 18 && i <= 26);
-        let row4 = board.filter((v, i) => i >= 27 && i <= 35);
-        let row5 = board.filter((v, i) => i >= 36 && i <= 44);
-        let row6 = board.filter((v, i) => i >= 45 && i <= 53);
-        let row7 = board.filter((v, i) => i >= 54 && i <= 62);
-        let row8 = board.filter((v, i) => i >= 63 && i <= 71);
-        let row9 = board.filter((v, i) => i >= 72 && i <= 80);
+        let [rA, rB, rC] = _randomiser(board[0], board[1], board[2]);
+        newBoard[0] = rA;
+        newBoard[1] = rB;
+        newBoard[2] = rC;
 
-        let [rA, rB, rC] = _randomiser(row1, row2, row3);
-        row1 = rA;
-        row2 = rB;
-        row3 = rC;
+        let [rD, rE, rF] = _randomiser(board[3], board[4], board[5]);
+        newBoard[3] = rD;
+        newBoard[4] = rE;
+        newBoard[5] = rF;
 
-        let [rD, rE, rF] = _randomiser(row4, row5, row6);
-        row4 = rD;
-        row5 = rE;
-        row6 = rF;
+        let [rG, rH, rI] = _randomiser(board[6], board[7], board[8]);
+        newBoard[6] = rG;
+        newBoard[7] = rH;
+        newBoard[8] = rI;
 
-        let [rG, rH, rI] = _randomiser(row7, row8, row9);
-        row7 = rG;
-        row8 = rH;
-        row9 = rI;
-
-        for (let n = 0; n < 81; n++) {
-            switch (true) {
-                case n >= 0 && n <= 8: 
-                    newBoard[n] = row1.shift();
-                    break;
-                case n >= 9 && n <= 17: 
-                    newBoard[n] = row2.shift();
-                    break;
-                case n >= 18 && n <= 26: 
-                    newBoard[n] = row3.shift();
-                    break;
-                case n >= 27 && n <= 35: 
-                    newBoard[n] = row4.shift();
-                    break;
-                case n >= 36 && n <= 44: 
-                    newBoard[n] = row5.shift();
-                    break;                
-                case n >= 45 && n <= 53: 
-                    newBoard[n] = row6.shift();
-                    break;
-                case n >= 54 && n <= 62: 
-                    newBoard[n] = row7.shift();
-                    break;
-                case n >= 63 && n <= 71: 
-                    newBoard[n] = row8.shift();
-                    break;
-                case n >= 72 && n <= 80: 
-                    newBoard[n] = row9.shift();
-                    break;
-            }
-        }
         return newBoard;
     }
 
     function _randomiseBigColumns(board) {
-        let newBoard = [];
+        let newBoard = [[],[],[],[],[],[],[],[],[]];
 
-        let column1 = board.filter((v, i) => i % 9 == 0 || i % 9 == 1 || i % 9 == 2);
-        let column2 = board.filter((v, i) => i % 9 == 3 || i % 9 == 4 || i % 9 == 5);
-        let column3 = board.filter((v, i) => i % 9 == 6 || i % 9 == 7 || i % 9 == 8);
+        let column1 = board.flatMap(x => x.filter((v, i) => i == 0 || i == 1 || i == 2));
+        let column2 = board.flatMap(x => x.filter((v, i) => i == 3 || i == 4 || i == 5));
+        let column3 = board.flatMap(x => x.filter((v, i) => i == 6 || i == 7 || i == 8));
+
+        console.log(column1, column2, column3)
        
 
-        let [a, b, c] = _randomiser(column1, column2, column3);
-        column1 = a;
-        column2 = b;
-        column3 = c;
-        console.log({column1, column2, column3})
+        let arrayOfNewBigColumns = _randomiser(column1, column2, column3);
+     
 
-        for (let n = 0; n < 81; n++) {
-            switch (n % 9) {
-                case 0: 
-                    newBoard[n] = column1.shift();
-                    break;
-                case 1: 
-                    newBoard[n] = column1.shift();
-                    break;
-                case 2: 
-                    newBoard[n] = column1.shift();
-                    break;
-                case 3: 
-                    newBoard[n] = column2.shift();
-                    break;
-                case 4: 
-                    newBoard[n] = column2.shift();
-                    break;                
-                case 5: 
-                    newBoard[n] = column2.shift();
-                    break;
-                case 6: 
-                    newBoard[n] = column3.shift();
-                    break;
-                case 7: 
-                    newBoard[n] = column3.shift();
-                    break;
-                case 8: 
-                    newBoard[n] = column3.shift();
-                    break;
-            }
+        for (let n = 0; n < 3; n++) {
+            newBoard[0] = newBoard[0].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[1] = newBoard[1].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[2] = newBoard[2].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[3] = newBoard[3].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[4] = newBoard[4].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[5] = newBoard[5].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[6] = newBoard[6].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[7] = newBoard[7].concat(arrayOfNewBigColumns[n].splice(0,3));
+            newBoard[8] = newBoard[8].concat(arrayOfNewBigColumns[n].splice(0,3));
         }
-        console.log({newBoard})
+    
         return newBoard;
     }
 
     function _randomiseBigRows(board) {
         let newBoard = [];
 
-        let row1 = board.filter((v, i) => i >= 0 && i <= 26);
-        let row2 = board.filter((v, i) => i >= 27 && i <= 53);
-        let row3 = board.filter((v, i) => i >= 54 && i <= 80);
+        let bigRow1 = board[0].concat(board[1], board[2]);
+        let bigRow2 = board[3].concat(board[4], board[5]);
+        let bigRow3 = board[6].concat(board[7], board[8]);
 
-        let [rA, rB, rC] = _randomiser(row1, row2, row3);
-        row1 = rA;
-        row2 = rB;
-        row3 = rC;
+        let [r1, r2, r3] = _randomiser(bigRow1, bigRow2, bigRow3);
 
-        for (let n = 0; n < 81; n++) {
-            switch (true) {
-                case n >= 0 && n <= 26: 
-                    newBoard[n] = row1.shift();
-                    break;
-                case n >= 27 && n <= 53: 
-                    newBoard[n] = row2.shift();
-                    break;
-                case n >= 54 && n <= 80: 
-                    newBoard[n] = row3.shift();
-                    break;
-            }
-        }
+        newBoard[0] = r1.splice(0, 9);
+        newBoard[1] = r1.splice(0, 9);
+        newBoard[2] = r1.splice(0, 9);
+        newBoard[3] = r2.splice(0, 9);
+        newBoard[4] = r2.splice(0, 9);
+        newBoard[5] = r2.splice(0, 9);
+        newBoard[6] = r3.splice(0, 9);
+        newBoard[7] = r3.splice(0, 9);
+        newBoard[8] = r3.splice(0, 9);
+
+
         return newBoard;
     }
 
