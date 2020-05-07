@@ -1,5 +1,3 @@
-import Puzzle from "./Puzzle";
-
 const Display = (() => {
 
     function createGrid(container) {
@@ -30,7 +28,6 @@ const Display = (() => {
             cells[i].firstChild.innerText = board[i];
         }
     }
-
     
     return {
         createGrid,

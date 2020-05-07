@@ -1,7 +1,6 @@
 const Puzzle = (() => {
 
     function createPuzzle() {
-        //return _seed;
         const _seed = [
         9, 5, 7, 6, 1, 3, 2, 8, 4,
         4, 8, 3, 2, 5, 7, 1, 9, 6,
@@ -15,15 +14,15 @@ const Puzzle = (() => {
         ];
         
         let board = [];
-        board = randomiseColumns(_seed);
-        board = randomiseRows(board);
-        board = randomiseBigColumns(board);
-        board = randomiseBigRows(board);
+        board = _randomiseColumns(_seed);
+        board = _randomiseRows(board);
+        board = _randomiseBigColumns(board);
+        board = _randomiseBigRows(board);
 
         return board;
     }
 
-    function randomiseColumns(board) {
+    function _randomiseColumns(board) {
         let newBoard = [];
 
         let column1 = board.filter((v, i) => i % 9 == 0 );
@@ -36,17 +35,17 @@ const Puzzle = (() => {
         let column8 = board.filter((v, i) => i % 9 == 7 );
         let column9 = board.filter((v, i) => i % 9 == 8 );
 
-        let [a, b, c] = randomiser(column1, column2, column3);
+        let [a, b, c] = _randomiser(column1, column2, column3);
         column1 = a;
         column2 = b;
         column3 = c;
 
-        let [d, e, f] = randomiser(column4, column5, column6);
+        let [d, e, f] = _randomiser(column4, column5, column6);
         column4 = d;
         column5 = e;
         column6 = f;
 
-        let [g, h, i] = randomiser(column7, column8, column9);
+        let [g, h, i] = _randomiser(column7, column8, column9);
         column7 = g;
         column8 = h;
         column9 = i;
@@ -85,7 +84,7 @@ const Puzzle = (() => {
         return newBoard;
     }
 
-    function randomiseRows(board) {
+    function _randomiseRows(board) {
         let newBoard = [];
 
         let row1 = board.filter((v, i) => i >= 0 && i <= 8);
@@ -98,17 +97,17 @@ const Puzzle = (() => {
         let row8 = board.filter((v, i) => i >= 63 && i <= 71);
         let row9 = board.filter((v, i) => i >= 72 && i <= 80);
 
-        let [rA, rB, rC] = randomiser(row1, row2, row3);
+        let [rA, rB, rC] = _randomiser(row1, row2, row3);
         row1 = rA;
         row2 = rB;
         row3 = rC;
 
-        let [rD, rE, rF] = randomiser(row4, row5, row6);
+        let [rD, rE, rF] = _randomiser(row4, row5, row6);
         row4 = rD;
         row5 = rE;
         row6 = rF;
 
-        let [rG, rH, rI] = randomiser(row7, row8, row9);
+        let [rG, rH, rI] = _randomiser(row7, row8, row9);
         row7 = rG;
         row8 = rH;
         row9 = rI;
@@ -147,7 +146,7 @@ const Puzzle = (() => {
         return newBoard;
     }
 
-    function randomiseBigColumns(board) {
+    function _randomiseBigColumns(board) {
         let newBoard = [];
 
         let column1 = board.filter((v, i) => i % 9 == 0 || i % 9 == 1 || i % 9 == 2);
@@ -155,7 +154,7 @@ const Puzzle = (() => {
         let column3 = board.filter((v, i) => i % 9 == 6 || i % 9 == 7 || i % 9 == 8);
        
 
-        let [a, b, c] = randomiser(column1, column2, column3);
+        let [a, b, c] = _randomiser(column1, column2, column3);
         column1 = a;
         column2 = b;
         column3 = c;
@@ -196,14 +195,14 @@ const Puzzle = (() => {
         return newBoard;
     }
 
-    function randomiseBigRows(board) {
+    function _randomiseBigRows(board) {
         let newBoard = [];
 
         let row1 = board.filter((v, i) => i >= 0 && i <= 26);
         let row2 = board.filter((v, i) => i >= 27 && i <= 53);
         let row3 = board.filter((v, i) => i >= 54 && i <= 80);
 
-        let [rA, rB, rC] = randomiser(row1, row2, row3);
+        let [rA, rB, rC] = _randomiser(row1, row2, row3);
         row1 = rA;
         row2 = rB;
         row3 = rC;
@@ -224,7 +223,7 @@ const Puzzle = (() => {
         return newBoard;
     }
 
-    function randomiser(a, b, c) {
+    function _randomiser(a, b, c) {
         let d = [];
         let e = [];
         let length = a.length;
@@ -279,10 +278,6 @@ const Puzzle = (() => {
     // const checkWin = (board) => {
         
     // }
-
-
-    
-
 
     return {createPuzzle}
 
