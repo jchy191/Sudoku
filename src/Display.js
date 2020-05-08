@@ -40,4 +40,4 @@ const Display = (() => {
 
 })();
 
-export default Display;
+module.exports = Display;

@@ -1,5 +1,6 @@
-import Display from "./Display";
-import Puzzle from "./Puzzle"
+const Display = require('./Display');
+const Puzzle = require('./Puzzle');
+
 //const grid = document.getElementById("grid");
 
 

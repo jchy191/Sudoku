@@ -78,14 +78,11 @@ const Puzzle = (() => {
 
         let column1 = board.flatMap(x => x.filter((v, i) => i == 0 || i == 1 || i == 2));
         let column2 = board.flatMap(x => x.filter((v, i) => i == 3 || i == 4 || i == 5));
-        let column3 = board.flatMap(x => x.filter((v, i) => i == 6 || i == 7 || i == 8));
-
-        console.log(column1, column2, column3)
-       
+        let column3 = board.flatMap(x => x.filter((v, i) => i == 6 || i == 7 || i == 8));       
 
         let arrayOfNewBigColumns = _randomiser(column1, column2, column3);
      
-
+//TODO: refactor this
         for (let n = 0; n < 3; n++) {
             newBoard[0] = newBoard[0].concat(arrayOfNewBigColumns[n].splice(0,3));
             newBoard[1] = newBoard[1].concat(arrayOfNewBigColumns[n].splice(0,3));
@@ -184,4 +181,4 @@ const Puzzle = (() => {
 
 })();
 
-export default Puzzle;
+module.exports = Puzzle;
