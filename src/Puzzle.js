@@ -21,6 +21,17 @@ const Puzzle = (() => {
         return board;
     }
 
+    function createBlanks(solution) {
+        let puzzle = [...solution]
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                if (Math.random() < 0.5)
+                puzzle[i][j] = 0
+            }
+        }
+        return puzzle;
+    }
+
     function _randomiseColumns(board) {
         let newBoard = [[],[],[],[],[],[],[],[],[]];
 
@@ -177,7 +188,10 @@ const Puzzle = (() => {
         
     // }
 
-    return {createPuzzle}
+    return {
+        createPuzzle,
+        createBlanks
+    }
 
 })();
 

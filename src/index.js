@@ -11,10 +11,11 @@ const Puzzle = require('./Puzzle');
 
 const newGame = (() => {
 
-const currentBoard = Puzzle.createPuzzle();
+const solution = Puzzle.createPuzzle();
+const board = Puzzle.createBlanks(solution);
 
 const grid = document.getElementById("grid");
 Display.createGrid(grid);
-Display.renderNumbers(currentBoard);
+Display.renderNumbers(board);
 
 })();

@@ -2,7 +2,7 @@ const Display = (() => {
 
     function createGrid(container) {
         let c = 0;
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
                 let smallCell = document.createElement("div");
                 container.appendChild(smallCell).className = "small-grid-box";
@@ -11,26 +11,35 @@ const Display = (() => {
                 c++;
                 smallCell.appendChild(document.createElement("p"));
             }
-        }
+        
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++) {
                 let mediumCell = document.createElement("div");
                 container.appendChild(mediumCell).className = "medium-grid-box";
                 mediumCell.style.gridArea = `${i * 3 + 1}/${j * 3 + 1}/${(i + 1) * 3 + 1}/${(j + 1) * 3 + 1}`;
             }
-        }
     }
 
     function renderNumbers(board) {
         let cells = [...document.querySelectorAll(".small-grid-box")];
         let n = 0;
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
-                cells[n].firstChild.innerText = board[i][j];
+                if (board[i][j] != 0) 
+                    cells[n].firstChild.innerText = board[i][j];
+                if (board[i][j] == 0)
+                    _createTextEntry(cells[n])
                 n++;
             }
-        }
+
+    }
+
+    function _createTextEntry(container) {
+        let text = document.createElement("input")
+        text.setAttribute("type", "text");
+        text.className = "sudoku-input"
+        container.appendChild(text);
     }
     
     return {
