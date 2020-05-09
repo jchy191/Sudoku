@@ -18,11 +18,12 @@ const Puzzle = (() => {
         board = _randomiseRows(board);
         board = _randomiseBigColumns(board);
         board = _randomiseBigRows(board);
+        console.log(board);
         return board;
     }
 
     function createBlanks(solution) {
-        let puzzle = [...solution];
+        let puzzle = JSON.parse(JSON.stringify(solution));
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
                 if (Math.random() < 0.5)

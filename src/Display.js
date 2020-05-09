@@ -23,20 +23,30 @@ const Display = (() => {
 
     function renderNumbers(board) {
         let cells = [...document.querySelectorAll(".small-grid-box")];
-        let n = 0;
+        let c = 0;
         for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
                 if (board[i][j] != 0) 
-                    cells[n].firstChild.innerText = board[i][j];
+                    cells[c].firstChild.innerText = board[i][j];
                 if (board[i][j] == 0)
-                    _createTextEntry(cells[n], i, j)
-                n++;
+                    _createTextEntry(cells[c], i, j)
+                c++;
             }
     }
 
-    function updateBoard(board, value, cellID){
-        board[cellID.slice(0,1)][cellID.slice(1,2)] = parseInt(value);
-        console.log(board);
+    function highlightClashingCells(clashes) {
+        let cells = [...document.querySelectorAll(".small-grid-box")];
+        clashes.forEach(clash => {
+            let xRow = parseInt(clash.slice(0,1));
+            let xCol = parseInt(clash.slice(1,2));
+            let indexOfClashingCell = xRow * 9 + xCol;
+            cells[indexOfClashingCell].classList.add('error');
+        })
+    }
+
+    function resetClashingCells() {
+        let cells = [...document.querySelectorAll(".small-grid-box")];
+        cells.forEach(cell => cell.classList.remove('error'));
     }
 
     function _createTextEntry(container, i, j) {
@@ -53,7 +63,8 @@ const Display = (() => {
     return {
         createGrid,
         renderNumbers,
-        updateBoard
+        highlightClashingCells,
+        resetClashingCells
     }
 
 })();

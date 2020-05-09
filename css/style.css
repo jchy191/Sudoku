@@ -32,8 +32,13 @@
     width: 90%;
     border: none;
     text-align: center;
-
 }
+
+.error {
+    color: black;
+    background-color: pink;
+}
+
 input[type="text"] {
     font-size: 32px;
     font-family: 'Segoe UI', Tahoma, Helvetica, Geneva, Verdana, sans-serif;
@@ -42,6 +47,7 @@ input[type="text"] {
     padding: 0%;
     position: relative;
     bottom: 4px;
+    background-color: transparent;
 }
 
 #container {

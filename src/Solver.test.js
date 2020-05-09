@@ -49,30 +49,35 @@ const test2 = [
         ];
     
 
+test('findClashes method returns [] if there are no clashes', () => {
+    expect(Solver.findClashes(test1, 8, 6, 4)).toStrictEqual([]);
+})
 
-
-
+test('findClashes method returns array of clashing cell id if number appears in same row or column', () => {
+    expect(Solver.findClashes(test1, 8, 6, 2)).toStrictEqual(["87"]);
+    expect(Solver.findClashes(test1, 8, 6, 8)).toStrictEqual(["76"]);
+})
 
 test('isPossible method returns true if number is a possible solution', () => {
-    expect(Solver.isPossible(test1, 6, 8, 4)).toBeTruthy();
+    expect(Solver.isPossible(test1, 8, 6, 4)).toBeTruthy();
 })
 
 test('isPossible method returns false if number appears in same row or column', () => {
-    expect(Solver.isPossible(test1, 6, 8, 2)).toBeFalsy();
-    expect(Solver.isPossible(test1, 6, 8, 8)).toBeFalsy();
+    expect(Solver.isPossible(test1, 8, 6, 2)).toBeFalsy();
+    expect(Solver.isPossible(test1, 8, 6, 8)).toBeFalsy();
 })
 
 test('isPossible method returns false if number appears in same box', () => {
-    expect(Solver.isPossible(test1, 6, 8, 3)).toBeFalsy();
-    expect(Solver.isPossible(test1, 1, 8, 8)).toBeFalsy();
+    expect(Solver.isPossible(test1, 8, 6, 3)).toBeFalsy();
+    expect(Solver.isPossible(test1, 8, 1, 8)).toBeFalsy();
 })
 
 // test('solve method returns the correct solution', () => {
 //     expect(Solver.solve(test1)).toEqual(solution1);
 // })
 
-test('solve method returns both solutions when there are two solutions', () => {
-    expect(Solver.generatesSolutions(test2)).toEqual([solution1]);
-})
+// test('solve method returns both solutions when there are two solutions', () => {
+//     expect(Solver.generatesSolutions(test2)).toEqual([solution1]);
+// })
 
 

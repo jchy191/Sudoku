@@ -1,32 +1,55 @@
 const Display = require('./Display');
 const Puzzle = require('./Puzzle');
-
-//const grid = document.getElementById("grid");
-
-
-const newGame = (() => {
-
-const solution = Puzzle.createPuzzle();
-const board = Puzzle.createBlanks(solution);
-
-const grid = document.getElementById("grid");
-Display.createGrid(grid);
-Display.renderNumbers(board);
+const Solver = require('./Solver');
 
 
-let cells = [...document.querySelectorAll(".sudoku-input")];
-cells.forEach(cell => {
-    cell.addEventListener("input", function(){
-        if (!cell.value) 
-            Display.updateBoard(board, 0, cell.id);
-        if (/[1-9]/.test(cell.value)) 
-            Display.updateBoard(board, cell.value, cell.id);
-        if (/\D/.test(cell.value) || cell.value == 0) 
-            cell.value = "";
-        //the position of the input cell is stored in cell.id as a String 
+const gameFlow = (() => {
+
+    let solution = Puzzle.createPuzzle();
+    //console.log(solution);
+    let board = Puzzle.createBlanks(solution);
+    //console.log(solution);
+
+    const grid = document.getElementById("grid");
+    Display.createGrid(grid);
+    Display.renderNumbers(board);
+
+
+    let inputBoxes = [...document.querySelectorAll(".sudoku-input")];
+    inputBoxes.forEach(inputBox => {
+        inputBox.addEventListener("input", function(){
+            inputEntered(inputBox);
+        })
     })
-})
 
+    function inputEntered(inputBox) {
+        
+        let row = inputBox.id.slice(0,1);
+        let col = inputBox.id.slice(1,2);
 
+        Display.resetClashingCells();
+
+        if (inputBox.value == "") {
+            board[row][col] = 0;
+            console.log(board);
+            return;
+        }
+
+        if (/\D/.test(inputBox.value) || inputBox.value == 0) {
+            inputBox.value = "";
+            return;
+        }
+        
+        let clashes = Solver.findClashes(board, row, col, parseInt(inputBox.value));
+
+        if (clashes.length != 0) {
+            inputBox.value = "";
+            Display.highlightClashingCells(clashes);
+            return;
+        }
+
+        board[row][col] = parseInt(inputBox.value);
+        console.log(board);
+    }
 
 })();
