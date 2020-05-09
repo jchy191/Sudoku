@@ -29,22 +29,31 @@ const Display = (() => {
                 if (board[i][j] != 0) 
                     cells[n].firstChild.innerText = board[i][j];
                 if (board[i][j] == 0)
-                    _createTextEntry(cells[n])
+                    _createTextEntry(cells[n], i, j)
                 n++;
             }
-
     }
 
-    function _createTextEntry(container) {
-        let text = document.createElement("input")
+    function updateBoard(board, value, cellID){
+        board[cellID.slice(0,1)][cellID.slice(1,2)] = parseInt(value);
+        console.log(board);
+    }
+
+    function _createTextEntry(container, i, j) {
+        let text = document.createElement("input");
         text.setAttribute("type", "text");
-        text.className = "sudoku-input"
+        text.setAttribute("maxlength", "1");
+        text.setAttribute("size", "1");
+        text.setAttribute("patter", "[1-9]")
+        text.id = `${i}${j}`;
+        text.className = "sudoku-input";
         container.appendChild(text);
     }
     
     return {
         createGrid,
-        renderNumbers
+        renderNumbers,
+        updateBoard
     }
 
 })();

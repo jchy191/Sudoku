@@ -12,3 +12,10 @@ DisplayIO API:
 Read input
 
 
+Things to add:
+
+
+HTML/CSS
+Difficulty
+Show when wrong?
+Add clues?
