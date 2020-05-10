@@ -5,21 +5,34 @@ const Solver = require('./Solver');
 
 const gameFlow = (() => {
 
-    let solution = Puzzle.createPuzzle();
-    let board = Puzzle.createBlanks(solution);
+    let solution;
+    let initialBoard;
+    let board;
 
+    function newGame() {
+        solution = Puzzle.createPuzzle();
+        initialBoard = Puzzle.createBlanks(solution);
+        board = JSON.parse(JSON.stringify(initialBoard));
 
-    const grid = document.getElementById("grid");
-    Display.createGrid(grid);
-    Display.renderNumbers(board);
+        resetBoard();
+           
+    }
 
+    function resetBoard() {
+        board = JSON.parse(JSON.stringify(initialBoard));
+        const grid = document.querySelector(".game-board");
+        grid.innerHTML="";
+        Display.createGrid(grid);
+        Display.renderNumbers(board);
+        Display.resetClashingCells();
 
-    let inputBoxes = [...document.querySelectorAll(".sudoku-input")];
-    inputBoxes.forEach(inputBox => {
-        inputBox.addEventListener("input", function(){
-            inputEntered(inputBox);
-        })
-    })
+        let inputBoxes = [...document.querySelectorAll(".sudoku-input")];
+        inputBoxes.forEach(inputBox => {
+            inputBox.addEventListener("input", function(){
+                inputEntered(inputBox);
+            })
+        })     
+    }
 
     function inputEntered(inputBox) {
         
@@ -30,7 +43,6 @@ const gameFlow = (() => {
 
         if (inputBox.value == "") {
             board[row][col] = 0;
-            console.log(board);
             return;
         }
 
@@ -49,5 +61,31 @@ const gameFlow = (() => {
 
         board[row][col] = parseInt(inputBox.value);
     }
+
+
+
+    return {
+        newGame,
+        resetBoard,
+        inputEntered
+    }
+
+})();
+
+
+const menuButtons = (() => {
+
+    document.getElementById("new-game-button").addEventListener("click", function(){
+        document.querySelector(".menu-screen").style.display = "none";
+        document.querySelector(".game-screen").style.display = "block";
+        gameFlow.newGame();
+    })
+
+    document.getElementById("main-menu-button").addEventListener("click", function(){
+        document.querySelector(".menu-screen").style.display = "block";
+        document.querySelector(".game-screen").style.display = "none";
+    })
+
+    document.getElementById("reset-button").addEventListener("click", gameFlow.resetBoard);
 
 })();

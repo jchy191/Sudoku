@@ -28,7 +28,6 @@ const Solver = (() => {
         return false;
     }
     
-
     function generatesSolutions(board){
 
         let solutions = [];

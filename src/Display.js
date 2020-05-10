@@ -26,10 +26,14 @@ const Display = (() => {
         let c = 0;
         for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
+                
                 if (board[i][j] != 0) 
                     cells[c].firstChild.innerText = board[i][j];
-                if (board[i][j] == 0)
+                if (board[i][j] == 0) {
+                    if (cells[c].hasChildNodes())
+                        cells[c].removeChild(cells[c].firstChild);
                     _createTextEntry(cells[c], i, j)
+                }
                 c++;
             }
     }
@@ -50,14 +54,14 @@ const Display = (() => {
     }
 
     function _createTextEntry(container, i, j) {
-        let text = document.createElement("input");
-        text.setAttribute("type", "text");
-        text.setAttribute("maxlength", "1");
-        text.setAttribute("size", "1");
-        text.setAttribute("patter", "[1-9]")
-        text.id = `${i}${j}`;
-        text.className = "sudoku-input";
-        container.appendChild(text);
+        let inputText = document.createElement("input");
+        inputText.setAttribute("type", "text");
+        inputText.setAttribute("maxlength", "1");
+        inputText.setAttribute("size", "1");
+        inputText.setAttribute("patter", "[1-9]")
+        inputText.id = `${i}${j}`;
+        inputText.className = "sudoku-input";
+        container.appendChild(inputText);
     }
     
     return {

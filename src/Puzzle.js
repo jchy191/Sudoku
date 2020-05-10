@@ -45,6 +45,11 @@ const Puzzle = (() => {
         return puzzle;
     }
 
+    return {
+        createPuzzle,
+        createBlanks
+    }
+
     function _randomiseColumns(board) {
         let newBoard = [[],[],[],[],[],[],[],[],[]];
 
@@ -106,7 +111,6 @@ const Puzzle = (() => {
 
         let arrayOfNewBigColumns = _randomiser(column1, column2, column3);
      
-//TODO: refactor this
         for (let n = 0; n < 3; n++) {
             newBoard[0] = newBoard[0].concat(arrayOfNewBigColumns[n].splice(0,3));
             newBoard[1] = newBoard[1].concat(arrayOfNewBigColumns[n].splice(0,3));
@@ -193,17 +197,7 @@ const Puzzle = (() => {
                 }
                 break;
         }
-        //console.log([a, b, c]);
         return [a, b, c];
-    }
-
-    // const checkWin = (board) => {
-        
-    // }
-
-    return {
-        createPuzzle,
-        createBlanks
     }
 
 })();

@@ -4,18 +4,60 @@ header {
     padding: 20px;
 }
 
-section {
-    background-color: rgba(152, 251, 152, 0.3);
-}
-
 h1 {
-    font-size: 32px;
-    font-family: 'Segoe UI', Tahoma, Helvetica, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    font-family: monospace;
     font-weight: 100;
 }
 
+body {
+    background-color: rgba(152, 251, 152, 0.3);
+}
 
-#grid {
+button {
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 5%;
+    padding: 3px 10px 3px 10px;
+}
+
+/* Menu Screen */
+
+.menu-screen {
+    padding: 30px;
+    line-height: 30px;
+}
+
+.menu-screen h2{
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.menu-screen p{
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 30px 0px 30px 0px;
+}
+
+
+
+/*Game Screen*/
+
+.game-screen {
+    display: none;
+}
+
+#main-menu-button, #reset-button {
+    margin: 20px;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+}
+
+
+.game-board {
     display: grid;
     grid-gap: 0;
     grid-template-rows: repeat(9, 1fr);
@@ -30,8 +72,6 @@ h1 {
     border: 3px solid black;
     text-align: center;
 }
-
-
 
 .small-grid-box {
     border: 1px solid black;
@@ -49,11 +89,7 @@ h1 {
     width: 90%;
     border: none;
     text-align: center;
-}
-
-.error {
-    color: black;
-    background-color: pink;
+    background-color: red;
 }
 
 input[type="text"] {
@@ -63,11 +99,11 @@ input[type="text"] {
     color: brown;
     padding: 0%;
     position: relative;
-    bottom: 4px;
+    top: 12px;
     background-color: transparent;
 }
 
-#container {
-    align-items: center;
-    padding: 30px;
+.error {
+    color: black;
+    background-color: pink;
 }
