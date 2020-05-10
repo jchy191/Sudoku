@@ -6,9 +6,8 @@ const Solver = require('./Solver');
 const gameFlow = (() => {
 
     let solution = Puzzle.createPuzzle();
-    //console.log(solution);
     let board = Puzzle.createBlanks(solution);
-    //console.log(solution);
+
 
     const grid = document.getElementById("grid");
     Display.createGrid(grid);
@@ -49,7 +48,6 @@ const gameFlow = (() => {
         }
 
         board[row][col] = parseInt(inputBox.value);
-        console.log(board);
     }
 
 })();

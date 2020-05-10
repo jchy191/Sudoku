@@ -1,3 +1,20 @@
+header {
+    background-color: forestgreen;
+    text-align: center;
+    padding: 20px;
+}
+
+section {
+    background-color: rgba(152, 251, 152, 0.3);
+}
+
+h1 {
+    font-size: 32px;
+    font-family: 'Segoe UI', Tahoma, Helvetica, Geneva, Verdana, sans-serif;
+    font-weight: 100;
+}
+
+
 #grid {
     display: grid;
     grid-gap: 0;

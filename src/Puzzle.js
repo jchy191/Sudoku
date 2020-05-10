@@ -1,3 +1,6 @@
+const Solver = require('./Solver');
+
+
 const Puzzle = (() => {
 
     function createPuzzle() {
@@ -18,18 +21,27 @@ const Puzzle = (() => {
         board = _randomiseRows(board);
         board = _randomiseBigColumns(board);
         board = _randomiseBigRows(board);
-        console.log(board);
         return board;
     }
 
     function createBlanks(solution) {
         let puzzle = JSON.parse(JSON.stringify(solution));
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 9; j++) {
-                if (Math.random() < 0.5)
-                puzzle[i][j] = 0
+        let i = 0;
+        let n = Math.floor(Math.random() * 4)
+        while(i < 52 + n) {
+            let row = Math.floor(Math.random() * 9);
+            let col = Math.floor(Math.random() * 9);
+            if (puzzle[row][col] != 0) {
+                let a = puzzle[row][col];
+                puzzle[row][col] = 0;
+                if (Solver.isWellDefined(puzzle)) {
+                    i++;
+                    continue;
+                }
+                puzzle[row][col] = a;
             }
         }
+
         return puzzle;
     }
 

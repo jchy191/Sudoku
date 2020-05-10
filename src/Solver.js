@@ -31,9 +31,8 @@ const Solver = (() => {
 
     function generatesSolutions(board){
 
-        let count = 0;
         let solutions = [];
-        let newBoard = [...board];
+        let newBoard = JSON.parse(JSON.stringify(board));
 
         solve();
 
@@ -45,25 +44,26 @@ const Solver = (() => {
                             if (isPossible(newBoard, i, j, n)) {
                                 newBoard[i][j] = n;
                                 solve();
-                                newBoard[i][j] = 0;
-
+                                if (solutions.length <= 1)
+                                    newBoard[i][j] = 0;
                             }
                         return;
                     }
-            count++;
-            //console.log(newBoard, count);
-            solutions.push(newBoard);
-            // console.log({newBoard,count,solutions});
-            // console.log(solutions);
+                solutions.push(JSON.parse(JSON.stringify(newBoard)));
         }
         return solutions;
+    }
+
+    function isWellDefined(board) {
+        return generatesSolutions(board).length == 1;
     }
 
 
     return {
         findClashes,
         isPossible,
-        generatesSolutions
+        generatesSolutions,
+        isWellDefined
     }
 
 
