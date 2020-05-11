@@ -8,6 +8,7 @@ const gameFlow = (() => {
     let solution;
     let initialBoard;
     let board;
+    let moves = [];
 
      function newGame(difficulty) {
         if (difficulty == "easy" || difficulty == "med") {        
@@ -28,6 +29,8 @@ const gameFlow = (() => {
 
     function resetBoard() {
         board = JSON.parse(JSON.stringify(initialBoard));
+        moves = [];
+
         const grid = document.querySelector(".game-board");
         grid.innerHTML="";
         Display.createGrid(grid);
@@ -50,7 +53,9 @@ const gameFlow = (() => {
         Display.resetClashingCells();
 
         if (inputBox.value == "") {
+            moves.push([row, col, board[row][col]]);
             board[row][col] = 0;
+            console.log("hi");
             return;
         }
 
@@ -66,16 +71,35 @@ const gameFlow = (() => {
             Display.highlightClashingCells(clashes);
             return;
         }
-
+        moves.push([row, col, board[row][col]]);
+        console.log("number");
         board[row][col] = parseInt(inputBox.value);
+
     }
 
+    function undoInput() {
+        if (moves.length == 0) return;
 
+        Display.resetClashingCells();
+        let lastMove = moves.pop();
+        let [row, col, value] = lastMove;
+        board[row][col] = value;
+        console.log(board);
+
+        let indexOfCell = parseInt(row) * 9 + parseInt(col);
+        let cells = [...document.querySelectorAll(".small-grid-box")];
+
+        if (value == 0) 
+            cells[indexOfCell].lastChild.value = "";
+        if (value != 0) 
+            cells[indexOfCell].lastChild.value = value;
+    }
 
     return {
         newGame,
         resetBoard,
-        inputEntered
+        inputEntered,
+        undoInput
     }
 
 })();
@@ -98,8 +122,8 @@ const menuButtons = (() => {
         setVisibility(".menu-screen", false);
         setVisibility(".game-screen", true);
     })
-
-    document.getElementById("new-game-hard").addEventListener("click", function(){
+    
+    document.getElementById("new-game-hard").addEventListener("click", function() {
         gameFlow.newGame("hard");
         setVisibility(".menu-screen", false);
         setVisibility(".game-screen", true);
@@ -111,5 +135,7 @@ const menuButtons = (() => {
     })
 
     document.getElementById("reset-button").addEventListener("click", gameFlow.resetBoard);
+
+    document.getElementById("undo-button").addEventListener("click", gameFlow.undoInput);
 
 })();

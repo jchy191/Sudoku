@@ -30,8 +30,6 @@ const Display = (() => {
                 if (board[i][j] != 0) 
                     cells[c].firstChild.innerText = board[i][j];
                 if (board[i][j] == 0) {
-                    if (cells[c].hasChildNodes())
-                        cells[c].removeChild(cells[c].firstChild);
                     _createTextEntry(cells[c], i, j)
                 }
                 c++;
