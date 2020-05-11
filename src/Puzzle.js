@@ -4,7 +4,7 @@ const Solver = require('./Solver');
 const Puzzle = (() => {
 
     function createPuzzle() {
-        const _seed = [
+        const seed = [
         [9, 5, 7, 6, 1, 3, 2, 8, 4],
         [4, 8, 3, 2, 5, 7, 1, 9, 6],
         [6, 1, 2, 8, 4, 9, 5, 3, 7],
@@ -17,18 +17,25 @@ const Puzzle = (() => {
         ];
         
         let board = [];
-        board = _randomiseColumns(_seed);
+        board = _randomiseColumns(seed);
         board = _randomiseRows(board);
         board = _randomiseBigColumns(board);
         board = _randomiseBigRows(board);
         return board;
     }
 
-    function createBlanks(solution) {
+    function createBlanks(solution, difficulty) {
         let puzzle = JSON.parse(JSON.stringify(solution));
         let i = 0;
-        let n = Math.floor(Math.random() * 4)
-        while(i < 52 + n) {
+        let n;
+
+        if (difficulty == "easy")
+            n = Math.floor(Math.random() * 3) + 40;
+
+        if (difficulty == "med")
+            n = Math.floor(Math.random() * 3) + 50;
+
+        while(i < n) {
             let row = Math.floor(Math.random() * 9);
             let col = Math.floor(Math.random() * 9);
             if (puzzle[row][col] != 0) {
@@ -41,13 +48,52 @@ const Puzzle = (() => {
                 puzzle[row][col] = a;
             }
         }
-
         return puzzle;
     }
 
+    function createHardPuzzle() {
+        const hardSeed1 = [
+            [2, 0, 0, 8, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 4, 3, 0],
+            [5, 0, 4, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 7, 0, 8, 0, 0],
+            [0, 0, 9, 0, 0, 0, 1, 0, 0],
+            [0, 2, 0, 0, 3, 0, 0, 0, 0],
+            [6, 0, 0, 0, 0, 8, 0, 7, 5],
+            [0, 0, 3, 4, 0, 0, 0, 0, 0],
+            [0, 0, 0, 2, 0, 0, 6, 0, 0]
+            ];
+
+        const hardSeed2 = [
+            [0, 0, 0, 7, 0, 5, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 4, 3, 0, 2, 0, 0],
+            [0, 0, 0, 0, 0, 0, 5, 0, 6],
+            [8, 0, 6, 5, 0, 9, 0, 0, 0],
+            [0, 0, 9, 0, 0, 0, 4, 1, 8],
+            [0, 0, 0, 0, 8, 1, 0, 0, 0],
+            [0, 0, 2, 0, 0, 0, 0, 5, 0],
+            [0, 4, 0, 0, 0, 0, 3, 0, 0]
+            ];
+        
+        let board = [];
+        if (Math.random() < 0.5) {
+            board = _randomiseColumns(hardSeed1);
+        } else {
+            board = _randomiseColumns(hardSeed2);
+        }
+        board = _randomiseRows(board);
+        board = _randomiseBigColumns(board);
+        board = _randomiseBigRows(board);
+        return board;
+        
+    }
+
+
     return {
         createPuzzle,
-        createBlanks
+        createBlanks,
+        createHardPuzzle
     }
 
     function _randomiseColumns(board) {

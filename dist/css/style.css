@@ -39,6 +39,13 @@ button {
     margin: 30px 0px 30px 0px;
 }
 
+#new-game-easy, #new-game-medium, #new-game-hard {
+    width: 120px;
+}
+
+#load {
+    display: none;
+}
 
 
 /*Game Screen*/

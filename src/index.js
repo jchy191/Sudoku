@@ -9,13 +9,21 @@ const gameFlow = (() => {
     let initialBoard;
     let board;
 
-    function newGame() {
-        solution = Puzzle.createPuzzle();
-        initialBoard = Puzzle.createBlanks(solution);
-        board = JSON.parse(JSON.stringify(initialBoard));
+     function newGame(difficulty) {
+        if (difficulty == "easy" || difficulty == "med") {        
+            solution = Puzzle.createPuzzle();
+            initialBoard = Puzzle.createBlanks(solution, difficulty);
+        }
 
+        if (difficulty == "hard") {
+            initialBoard = Puzzle.createHardPuzzle();
+            solution = Solver.generatesSolutions(initialBoard).pop();
+            console.log(solution)
+        }
+
+        board = JSON.parse(JSON.stringify(initialBoard));
+        
         resetBoard();
-           
     }
 
     function resetBoard() {
@@ -75,15 +83,31 @@ const gameFlow = (() => {
 
 const menuButtons = (() => {
 
-    document.getElementById("new-game-button").addEventListener("click", function(){
-        document.querySelector(".menu-screen").style.display = "none";
-        document.querySelector(".game-screen").style.display = "block";
-        gameFlow.newGame();
+    function setVisibility(selector, visible) {
+        document.querySelector(selector).style.display = visible ? 'block' : 'none';
+      }
+
+    document.getElementById("new-game-easy").addEventListener("click", function(){
+        gameFlow.newGame("easy");
+        setVisibility(".menu-screen", false);
+        setVisibility(".game-screen", true);
+    })
+
+    document.getElementById("new-game-medium").addEventListener("click", function(){
+        gameFlow.newGame("med");
+        setVisibility(".menu-screen", false);
+        setVisibility(".game-screen", true);
+    })
+
+    document.getElementById("new-game-hard").addEventListener("click", function(){
+        gameFlow.newGame("hard");
+        setVisibility(".menu-screen", false);
+        setVisibility(".game-screen", true);
     })
 
     document.getElementById("main-menu-button").addEventListener("click", function(){
-        document.querySelector(".menu-screen").style.display = "block";
-        document.querySelector(".game-screen").style.display = "none";
+        setVisibility(".menu-screen", true);
+        setVisibility(".game-screen", false);
     })
 
     document.getElementById("reset-button").addEventListener("click", gameFlow.resetBoard);

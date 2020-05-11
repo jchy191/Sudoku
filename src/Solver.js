@@ -33,8 +33,6 @@ const Solver = (() => {
         let solutions = [];
         let newBoard = JSON.parse(JSON.stringify(board));
 
-        solve();
-
         function solve() {
             for (let i = 0; i < 9; i++) 
                 for (let j = 0; j < 9; j++) 
@@ -50,6 +48,9 @@ const Solver = (() => {
                     }
                 solutions.push(JSON.parse(JSON.stringify(newBoard)));
         }
+
+        solve();
+
         return solutions;
     }
 
