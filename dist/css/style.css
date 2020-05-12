@@ -132,3 +132,68 @@ input[type="text"] {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 30px 0px 30px 0px;
 }
+
+
+@media only screen and (max-width: 670px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    button {
+        font-size: 12px;
+        border-radius: 5%;
+        padding: 3px 8px 3px 8px;
+    }
+
+    #new-game-easy, #new-game-medium, #new-game-hard {
+        width: 80px;
+        margin-bottom: 15px;
+    }
+    
+    
+    #main-menu-button, #reset-button, #hints-button {
+        margin: 30px 20px 30px 15px;
+    }
+
+    .game-board {
+        width: 430px;
+        height: 430px;
+    }
+
+    .small-grid-box p {
+        font-size: 20px;
+        margin: 12px;
+    }
+
+    input[type="text"] {
+        font-size: 20px;
+        color: brown;
+        padding: 0%;
+        position: relative;
+        bottom: 2px;
+        background-color: transparent;
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+
+    .game-board {
+        width: 360px;
+        height: 360px;
+    }
+
+    .small-grid-box p {
+        font-size: 18px;
+        margin: 9px;
+    }
+
+    input[type="text"] {
+        font-size: 18px;
+        color: brown;
+        padding: 0%;
+        position: relative;
+        bottom: 2px;
+        background-color: transparent;
+    }
+}
