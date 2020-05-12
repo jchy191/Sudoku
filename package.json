@@ -20,9 +20,14 @@
   "homepage": "https://github.com/jchy191/Sudoku#readme",
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-jest": "^26.0.1",
+    "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.9.0",
     "jest": "^26.0.1",
+    "lodash": "^4.17.15",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }

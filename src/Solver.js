@@ -1,13 +1,15 @@
+import _ from 'lodash';
+
 const Solver = (() => {
 
     function findClashes(board, row, col, n) {
         let clashes = new Set();
 
         for (let i = 0; i < 9; i++) 
-            if (board[i][col] == n) 
+            if (board[i][col] === n) 
                 clashes.add(`${i}${col}`);
         for (let j = 0; j < 9; j++)
-            if (board[row][j] == n) 
+            if (board[row][j] === n) 
                 clashes.add(`${row}${j}`);
 
         let bigCol = Math.floor(col / 3);
@@ -15,7 +17,7 @@ const Solver = (() => {
 
         for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++)
-                if (board[bigRow * 3 + i][bigCol * 3 + j] == n) 
+                if (board[bigRow * 3 + i][bigCol * 3 + j] === n) 
                     clashes.add(`${bigRow * 3 + i}${bigCol * 3 + j}`);
         
         clashes.delete(`${row}${col}`)
@@ -31,7 +33,7 @@ const Solver = (() => {
     function generatesSolutions(board){
 
         let solutions = [];
-        let newBoard = JSON.parse(JSON.stringify(board));
+        let newBoard = _.cloneDeep(board);
 
         function solve() {
             for (let i = 0; i < 9; i++) 
@@ -46,7 +48,7 @@ const Solver = (() => {
                             }
                         return;
                     }
-                solutions.push(JSON.parse(JSON.stringify(newBoard)));
+                solutions.push(_.cloneDeep(newBoard));
         }
 
         solve();
@@ -69,4 +71,4 @@ const Solver = (() => {
 
 })();
 
-module.exports = Solver;
+export default Solver;

@@ -26,10 +26,9 @@ const Display = (() => {
         let c = 0;
         for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
-                
-                if (board[i][j] != 0) 
+                if (board[i][j] !== 0) 
                     cells[c].firstChild.innerText = board[i][j];
-                if (board[i][j] == 0) {
+                if (board[i][j] === 0) {
                     _createTextEntry(cells[c], i, j)
                 }
                 c++;
@@ -51,24 +50,32 @@ const Display = (() => {
         cells.forEach(cell => cell.classList.remove('error'));
     }
 
-    function _createTextEntry(container, i, j) {
-        let inputText = document.createElement("input");
-        inputText.setAttribute("type", "text");
-        inputText.setAttribute("maxlength", "1");
-        inputText.setAttribute("size", "1");
-        inputText.setAttribute("patter", "[1-9]")
-        inputText.id = `${i}${j}`;
-        inputText.className = "sudoku-input";
-        container.appendChild(inputText);
+    function setVisibility(selector, visible) {
+        document.querySelector(selector).style.display = visible ? 'block' : 'none';
     }
-    
+
+
     return {
         createGrid,
         renderNumbers,
         highlightClashingCells,
-        resetClashingCells
+        resetClashingCells,
+        setVisibility
     }
+
+    
+    function _createTextEntry(container, i, j) {
+        let inputTextbox = document.createElement("input");
+        inputTextbox.setAttribute("type", "text");
+        inputTextbox.setAttribute("maxlength", "1");
+        inputTextbox.setAttribute("size", "1");
+        inputTextbox.setAttribute("patter", "[1-9]")
+        inputTextbox.id = `${i}${j}`;
+        inputTextbox.className = "sudoku-input";
+        container.appendChild(inputTextbox);
+    }
+    
 
 })();
 
-module.exports = Display;
+export default Display;

@@ -1,0 +1,102 @@
+import Display from './Display'
+import Puzzle from './Puzzle'
+import Solver from './Solver'
+import _ from 'lodash';
+
+
+const GameFlow = (() => {
+
+    let solution;
+    let initialBoard;
+    let currentBoard;
+    let movesHistory = [];
+
+    function newGame(difficulty) {
+        if (difficulty === "easy" || difficulty === "med") {        
+            solution = Puzzle.createPuzzle();
+            initialBoard = Puzzle.createBlanks(solution, difficulty);
+        }
+
+        if (difficulty === "hard") {
+            initialBoard = Puzzle.createHardPuzzle();
+            solution = Solver.generatesSolutions(initialBoard).pop();
+        }
+
+        resetBoard();
+    }
+
+    function resetBoard() {
+        currentBoard = _.cloneDeep(initialBoard);
+        movesHistory = [];
+
+        const grid = document.querySelector(".game-board");
+        grid.innerHTML="";
+        Display.createGrid(grid);
+        Display.renderNumbers(currentBoard);
+        Display.resetClashingCells();
+
+        let inputBoxes = [...document.querySelectorAll(".sudoku-input")];
+        inputBoxes.forEach(inputBox => {
+            inputBox.addEventListener("input", function(){
+                inputEntered(inputBox);
+            })
+        })     
+    }
+
+    function inputEntered(inputBox) {
+        
+        let row = inputBox.id.slice(0,1);
+        let col = inputBox.id.slice(1,2);
+
+        Display.resetClashingCells();
+
+        if (inputBox.value === "") {
+            movesHistory.push([row, col, currentBoard[row][col]]);
+            currentBoard[row][col] = 0;
+            return;
+        }
+
+        if (/\D/.test(inputBox.value) || inputBox.value === 0) {
+            inputBox.value = "";
+            return;
+        }
+        
+        let clashes = Solver.findClashes(currentBoard, row, col, parseInt(inputBox.value));
+
+        if (clashes.length !== 0) {
+            inputBox.value = "";
+            Display.highlightClashingCells(clashes);
+            return;
+        }
+        movesHistory.push([row, col, currentBoard[row][col]]);
+        currentBoard[row][col] = parseInt(inputBox.value);
+
+    }
+
+    function undoInput() {
+        if (movesHistory.length === 0) return;
+
+        Display.resetClashingCells();
+        let lastMove = movesHistory.pop();
+        let [row, col, value] = lastMove;
+        currentBoard[row][col] = value;
+
+        let indexOfCell = parseInt(row) * 9 + parseInt(col);
+        let cells = [...document.querySelectorAll(".small-grid-box")];
+        if (value === 0) 
+            cells[indexOfCell].lastChild.value = "";
+        if (value !== 0) 
+            cells[indexOfCell].lastChild.value = value;
+    }
+
+    return {
+        newGame,
+        resetBoard,
+        inputEntered,
+        undoInput
+    }
+
+})();
+
+
+export default GameFlow;

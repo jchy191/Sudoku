@@ -1,5 +1,5 @@
-const Solver = require('./Solver');
-
+import Solver from './Solver'
+import _ from 'lodash';
 
 const Puzzle = (() => {
 
@@ -16,29 +16,24 @@ const Puzzle = (() => {
         [7, 3, 6, 1, 8, 5, 4, 2, 9]
         ];
         
-        let board = [];
-        board = _randomiseColumns(seed);
-        board = _randomiseRows(board);
-        board = _randomiseBigColumns(board);
-        board = _randomiseBigRows(board);
-        return board;
+        return _randomiseBigRows(_randomiseBigColumns(_randomiseRows(_randomiseColumns(seed))));
     }
 
     function createBlanks(solution, difficulty) {
-        let puzzle = JSON.parse(JSON.stringify(solution));
+        const puzzle = _.cloneDeep(solution);
         let i = 0;
         let n;
 
-        if (difficulty == "easy")
+        if (difficulty === "easy")
             n = Math.floor(Math.random() * 3) + 40;
 
-        if (difficulty == "med")
+        if (difficulty === "med")
             n = Math.floor(Math.random() * 3) + 50;
 
         while(i < n) {
             let row = Math.floor(Math.random() * 9);
             let col = Math.floor(Math.random() * 9);
-            if (puzzle[row][col] != 0) {
+            if (puzzle[row][col] !== 0) {
                 let a = puzzle[row][col];
                 puzzle[row][col] = 0;
                 if (Solver.isWellDefined(puzzle)) {
@@ -76,19 +71,12 @@ const Puzzle = (() => {
             [0, 4, 0, 0, 0, 0, 3, 0, 0]
             ];
         
-        let board = [];
         if (Math.random() < 0.5) {
-            board = _randomiseColumns(hardSeed1);
+            return _randomiseBigRows(_randomiseBigColumns(_randomiseRows(_randomiseColumns(hardSeed1))));
         } else {
-            board = _randomiseColumns(hardSeed2);
-        }
-        board = _randomiseRows(board);
-        board = _randomiseBigColumns(board);
-        board = _randomiseBigRows(board);
-        return board;
-        
+            return _randomiseBigRows(_randomiseBigColumns(_randomiseRows(_randomiseColumns(hardSeed2))));
+        }        
     }
-
 
     return {
         createPuzzle,
@@ -248,4 +236,4 @@ const Puzzle = (() => {
 
 })();
 
-module.exports = Puzzle;
+export default Puzzle

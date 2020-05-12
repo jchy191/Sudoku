@@ -1,4 +1,4 @@
-const Solver = require('./Solver');
+import Solver from './Solver';
 
 const test1 = [
     [0, 5, 7, 6, 1, 3, 0, 8, 4],
