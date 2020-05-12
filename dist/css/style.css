@@ -113,3 +113,22 @@ input[type="text"] {
     color: black;
     background-color: pink;
 }
+
+.win-screen {
+    display: none;
+    background-color: rgba(34, 139, 34, 0.9);
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    margin: 5% auto; 
+    left: 0;
+    right: 0;
+    top: 40%;
+    padding: 0px 20px 0px 20px;
+}
+
+.win-screen p{
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 30px 0px 30px 0px;
+}

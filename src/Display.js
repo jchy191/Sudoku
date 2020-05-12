@@ -50,6 +50,10 @@ const Display = (() => {
         cells.forEach(cell => cell.classList.remove('error'));
     }
 
+    function gameWon() {
+        setVisibility(".win-screen", true);
+    }
+
     function setVisibility(selector, visible) {
         document.querySelector(selector).style.display = visible ? 'block' : 'none';
     }
@@ -60,10 +64,11 @@ const Display = (() => {
         renderNumbers,
         highlightClashingCells,
         resetClashingCells,
+        gameWon,
         setVisibility
     }
 
-    
+
     function _createTextEntry(container, i, j) {
         let inputTextbox = document.createElement("input");
         inputTextbox.setAttribute("type", "text");

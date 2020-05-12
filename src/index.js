@@ -14,7 +14,7 @@ document.getElementById("new-game-medium").addEventListener("click", function(){
     Display.setVisibility(".game-screen", true);
 })
 
-document.getElementById("new-game-hard").addEventListener("click", function() {
+document.getElementById("new-game-hard").addEventListener("click", function(){
     GameFlow.newGame("hard");
     Display.setVisibility(".menu-screen", false);
     Display.setVisibility(".game-screen", true);
@@ -23,8 +23,14 @@ document.getElementById("new-game-hard").addEventListener("click", function() {
 document.getElementById("main-menu-button").addEventListener("click", function(){
     Display.setVisibility(".menu-screen", true);
     Display.setVisibility(".game-screen", false);
+    Display.setVisibility(".win-screen", false);
 })
 
-document.getElementById("reset-button").addEventListener("click", GameFlow.resetBoard);
+document.getElementById("reset-button").addEventListener("click", function(){
+    Display.setVisibility(".win-screen", false)
+    GameFlow.resetBoard()
+})
 
-document.getElementById("undo-button").addEventListener("click", GameFlow.undoInput);
+document.getElementById("undo-button").addEventListener("click", function(){
+    GameFlow.undoInput()
+});

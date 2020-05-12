@@ -70,6 +70,11 @@ const GameFlow = (() => {
         }
         movesHistory.push([row, col, currentBoard[row][col]]);
         currentBoard[row][col] = parseInt(inputBox.value);
+        
+        if (_checkWin(currentBoard)) {
+            _gameWon();
+        }
+        
 
     }
 
@@ -94,6 +99,24 @@ const GameFlow = (() => {
         resetBoard,
         inputEntered,
         undoInput
+    }
+
+    function _checkWin(board){
+        for (let i = 0; i < 9; i++) 
+            for (let j = 0; j < 9; j++) 
+                if (board[i][j] == 0) return false
+        return true;
+    }
+
+    function _gameWon() {
+        Display.gameWon();
+
+        const grid = document.querySelector(".game-board");
+        grid.innerHTML="";
+        Display.createGrid(grid);
+        Display.renderNumbers(currentBoard);
+        
+        movesHistory = [];
     }
 
 })();

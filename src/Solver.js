@@ -31,7 +31,6 @@ const Solver = (() => {
     }
     
     function generatesSolutions(board){
-
         let solutions = [];
         let newBoard = _.cloneDeep(board);
 
@@ -52,7 +51,6 @@ const Solver = (() => {
         }
 
         solve();
-
         return solutions;
     }
 
