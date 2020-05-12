@@ -100,6 +100,8 @@ const GameFlow = (() => {
                 if (currentBoard[i][j] === 0)
                     emptySpots.push({row: i, col: j, value: solution[i][j]})
         
+        if (emptySpots.length === 0) return;
+
         let hint = emptySpots[Math.floor(Math.random() * emptySpots.length)];
         currentBoard[hint.row][hint.col] = hint.value;
 
