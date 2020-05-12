@@ -53,8 +53,8 @@ button {
     display: none;
 }
 
-#main-menu-button, #reset-button {
-    margin: 20px;
+#main-menu-button, #reset-button, #hints-button {
+    margin: 30px 20px 30px 20px;
 }
 
 .game-container {

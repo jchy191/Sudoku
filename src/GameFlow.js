@@ -45,8 +45,8 @@ const GameFlow = (() => {
 
     function inputEntered(inputBox) {
         
-        let row = inputBox.id.slice(0,1);
-        let col = inputBox.id.slice(1,2);
+        let row = parseInt(inputBox.id.slice(0,1));
+        let col = parseInt(inputBox.id.slice(1,2));
 
         Display.resetClashingCells();
 
@@ -86,19 +86,37 @@ const GameFlow = (() => {
         let [row, col, value] = lastMove;
         currentBoard[row][col] = value;
 
-        let indexOfCell = parseInt(row) * 9 + parseInt(col);
         let cells = [...document.querySelectorAll(".small-grid-box")];
         if (value === 0) 
-            cells[indexOfCell].lastChild.value = "";
+            cells[row * 9 + col].lastChild.value = "";
         if (value !== 0) 
-            cells[indexOfCell].lastChild.value = value;
+            cells[row * 9 + col].lastChild.value = value;
     }
+
+    function giveHint() {
+        let emptySpots = [];
+        for (let i = 0; i < 9; i++)
+            for (let j = 0; j < 9; j++)
+                if (currentBoard[i][j] === 0)
+                    emptySpots.push({row: i, col: j, value: solution[i][j]})
+        
+        let hint = emptySpots[Math.floor(Math.random() * emptySpots.length)];
+        currentBoard[hint.row][hint.col] = hint.value;
+
+        let cells = [...document.querySelectorAll(".small-grid-box")];
+        cells[hint.row * 9 + hint.col].lastChild.value = hint.value;
+
+        if (_checkWin(currentBoard)) {
+            _gameWon();
+        }
+    }   
 
     return {
         newGame,
         resetBoard,
         inputEntered,
-        undoInput
+        undoInput,
+        giveHint
     }
 
     function _checkWin(board){
@@ -115,7 +133,7 @@ const GameFlow = (() => {
         grid.innerHTML="";
         Display.createGrid(grid);
         Display.renderNumbers(currentBoard);
-        
+
         movesHistory = [];
     }
 

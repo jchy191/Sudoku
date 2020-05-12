@@ -34,3 +34,7 @@ document.getElementById("reset-button").addEventListener("click", function(){
 document.getElementById("undo-button").addEventListener("click", function(){
     GameFlow.undoInput()
 });
+
+document.getElementById("hints-button").addEventListener("click", function(){
+    GameFlow.giveHint()
+});
