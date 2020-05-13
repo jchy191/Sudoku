@@ -7,7 +7,7 @@ header {
 h1 {
     font-size: 40px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 body {
@@ -82,12 +82,13 @@ button {
 .small-grid-box {
     border: 1px solid black;
     text-align: center;
+    vertical-align: middle;
 }
 
 .small-grid-box p {
     font-size: 32px;
-    font-family: 'Segoe UI', Tahoma, Helvetica, Geneva, Verdana, sans-serif;
-    font-weight: 300;
+    font-family: Helvetica, Geneva, Verdana, sans-serif;
+    font-weight: 500;
     margin: 16px;
 }
 
@@ -100,8 +101,8 @@ button {
 
 input[type="text"] {
     font-size: 32px;
-    font-family: 'Segoe UI', Tahoma, Helvetica, Geneva, Verdana, sans-serif;
-    font-weight: 300;
+    font-family: Helvetica, Geneva, Verdana, sans-serif;
+    font-weight: 500;
     color: brown;
     padding: 0%;
     position: relative;
@@ -133,6 +134,11 @@ input[type="text"] {
     margin: 30px 0px 30px 0px;
 }
 
+.loading-screen {
+    display: none;
+}
+
+
 
 @media only screen and (max-width: 670px) {
     h1 {
@@ -161,7 +167,7 @@ input[type="text"] {
     }
 
     .small-grid-box p {
-        font-size: 20px;
+        font-size: 22px;
         margin: 12px;
     }
 
@@ -185,7 +191,7 @@ input[type="text"] {
 
     .small-grid-box p {
         font-size: 18px;
-        margin: 9px;
+        margin: 10px;
     }
 
     input[type="text"] {

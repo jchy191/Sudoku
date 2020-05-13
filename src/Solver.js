@@ -2,14 +2,14 @@ import _ from 'lodash';
 
 const Solver = (() => {
 
-    function findClashes(board, row, col, n) {
+    function findClashes({board, row, col, value}) {
         let clashes = new Set();
 
         for (let i = 0; i < 9; i++) 
-            if (board[i][col] === n) 
+            if (board[i][col] === value) 
                 clashes.add(`${i}${col}`);
         for (let j = 0; j < 9; j++)
-            if (board[row][j] === n) 
+            if (board[row][j] === value) 
                 clashes.add(`${row}${j}`);
 
         let bigCol = Math.floor(col / 3);
@@ -17,7 +17,7 @@ const Solver = (() => {
 
         for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++)
-                if (board[bigRow * 3 + i][bigCol * 3 + j] === n) 
+                if (board[bigRow * 3 + i][bigCol * 3 + j] === value) 
                     clashes.add(`${bigRow * 3 + i}${bigCol * 3 + j}`);
         
         clashes.delete(`${row}${col}`)
@@ -25,8 +25,8 @@ const Solver = (() => {
         return Array.from(clashes);
     }
 
-    function isPossible(board, row, col, n) {
-        if (findClashes(board, row, col, n).length == 0) return true;
+    function isPossible({board, row, col, value}) {
+        if (findClashes({board: board, row: row, col: col, value: value}).length == 0) return true;
         return false;
     }
     
@@ -39,7 +39,7 @@ const Solver = (() => {
                 for (let j = 0; j < 9; j++) 
                     if (newBoard[i][j] === 0) {
                         for (let n = 1; n <= 9; n++) 
-                            if (isPossible(newBoard, i, j, n)) {
+                            if (isPossible({board: newBoard, row: i, col: j, value: n})) {
                                 newBoard[i][j] = n;
                                 solve();
                                 if (solutions.length <= 1)

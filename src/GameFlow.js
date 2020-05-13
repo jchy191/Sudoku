@@ -14,7 +14,7 @@ const GameFlow = (() => {
     function newGame(difficulty) {
         if (difficulty === "easy" || difficulty === "med") {        
             solution = Puzzle.createPuzzle();
-            initialBoard = Puzzle.createBlanks(solution, difficulty);
+            initialBoard = Puzzle.createBlanks({solution: solution, difficulty: difficulty});
         }
 
         if (difficulty === "hard") {
@@ -44,31 +44,32 @@ const GameFlow = (() => {
     }
 
     function inputEntered(inputBox) {
-        
+    
+
         let row = parseInt(inputBox.id.slice(0,1));
         let col = parseInt(inputBox.id.slice(1,2));
 
         Display.resetClashingCells();
 
         if (inputBox.value === "") {
-            movesHistory.push([row, col, currentBoard[row][col]]);
+            movesHistory.push({row: row, col: col, value: currentBoard[row][col]});
             currentBoard[row][col] = 0;
             return;
         }
 
-        if (/\D/.test(inputBox.value) || inputBox.value === 0) {
+        if (/\D/.test(inputBox.value) || inputBox.value === "0") {
             inputBox.value = "";
             return;
         }
         
-        let clashes = Solver.findClashes(currentBoard, row, col, parseInt(inputBox.value));
+        let clashes = Solver.findClashes({board: currentBoard, row: row, col: col, value: parseInt(inputBox.value)});
 
         if (clashes.length !== 0) {
             inputBox.value = "";
             Display.highlightClashingCells(clashes);
             return;
         }
-        movesHistory.push([row, col, currentBoard[row][col]]);
+        movesHistory.push({row: row, col: col, value: currentBoard[row][col]});
         currentBoard[row][col] = parseInt(inputBox.value);
         
         if (_checkWin(currentBoard)) {
@@ -83,14 +84,13 @@ const GameFlow = (() => {
 
         Display.resetClashingCells();
         let lastMove = movesHistory.pop();
-        let [row, col, value] = lastMove;
-        currentBoard[row][col] = value;
+        currentBoard[lastMove.row][lastMove.col] = lastMove.value;
 
         let cells = [...document.querySelectorAll(".small-grid-box")];
-        if (value === 0) 
-            cells[row * 9 + col].lastChild.value = "";
-        if (value !== 0) 
-            cells[row * 9 + col].lastChild.value = value;
+        if (lastMove.value === 0) 
+            cells[lastMove.row * 9 + lastMove.col].lastChild.value = "";
+        if (lastMove.value !== 0) 
+            cells[lastMove.row * 9 + lastMove.col].lastChild.value = lastMove.value;
     }
 
     function giveHint() {

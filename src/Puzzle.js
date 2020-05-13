@@ -19,7 +19,7 @@ const Puzzle = (() => {
         return _randomiseBigRows(_randomiseBigColumns(_randomiseRows(_randomiseColumns(seed))));
     }
 
-    function createBlanks(solution, difficulty) {
+    function createBlanks({solution, difficulty}) {
         const puzzle = _.cloneDeep(solution);
         let i = 0;
         let n;
