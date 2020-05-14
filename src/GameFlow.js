@@ -12,15 +12,9 @@ const GameFlow = (() => {
     let movesHistory = [];
 
     function newGame(difficulty) {
-        if (difficulty === "easy" || difficulty === "med") {        
-            solution = Puzzle.createPuzzle();
-            initialBoard = Puzzle.createBlanks({solution: solution, difficulty: difficulty});
-        }
 
-        if (difficulty === "hard") {
-            initialBoard = Puzzle.createHardPuzzle();
-            solution = Solver.generatesSolutions(initialBoard).pop();
-        }
+        solution = Puzzle.createPuzzle();
+        initialBoard = Puzzle.createBlanks({solution: solution, difficulty: difficulty});
 
         resetBoard();
     }

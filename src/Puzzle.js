@@ -25,10 +25,13 @@ const Puzzle = (() => {
         let n;
 
         if (difficulty === "easy")
-            n = Math.floor(Math.random() * 3) + 40;
+            n = Math.floor(Math.random() * 3) + 38;
 
         if (difficulty === "med")
-            n = Math.floor(Math.random() * 3) + 50;
+            n = Math.floor(Math.random() * 3) + 45;
+
+        if (difficulty === "hard")
+            n = Math.floor(Math.random() * 0) + 57;
 
         while(i < n) {
             let row = Math.floor(Math.random() * 9);
@@ -46,42 +49,10 @@ const Puzzle = (() => {
         return puzzle;
     }
 
-    function createHardPuzzle() {
-        const hardSeed1 = [
-            [2, 0, 0, 8, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 4, 3, 0],
-            [5, 0, 4, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 7, 0, 8, 0, 0],
-            [0, 0, 9, 0, 0, 0, 1, 0, 0],
-            [0, 2, 0, 0, 3, 0, 0, 0, 0],
-            [6, 0, 0, 0, 0, 8, 0, 7, 5],
-            [0, 0, 3, 4, 0, 0, 0, 0, 0],
-            [0, 0, 0, 2, 0, 0, 6, 0, 0]
-            ];
-
-        const hardSeed2 = [
-            [0, 0, 0, 7, 0, 5, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 4, 3, 0, 2, 0, 0],
-            [0, 0, 0, 0, 0, 0, 5, 0, 6],
-            [8, 0, 6, 5, 0, 9, 0, 0, 0],
-            [0, 0, 9, 0, 0, 0, 4, 1, 8],
-            [0, 0, 0, 0, 8, 1, 0, 0, 0],
-            [0, 0, 2, 0, 0, 0, 0, 5, 0],
-            [0, 4, 0, 0, 0, 0, 3, 0, 0]
-            ];
-        
-        if (Math.random() < 0.5) {
-            return _randomiseBigRows(_randomiseBigColumns(_randomiseRows(_randomiseColumns(hardSeed1))));
-        } else {
-            return _randomiseBigRows(_randomiseBigColumns(_randomiseRows(_randomiseColumns(hardSeed2))));
-        }        
-    }
-
     return {
         createPuzzle,
         createBlanks,
-        createHardPuzzle
+        //createHardPuzzle
     }
 
     function _randomiseColumns(board) {
