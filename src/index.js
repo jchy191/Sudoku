@@ -29,12 +29,6 @@ $("#new-game-hard").mousedown(function() {
     }, 100);
 })
 
-
-
-
-
-
-
 $("#main-menu-button").mousedown(function(){
     Display.setVisibility(".menu-screen", true);
     Display.setVisibility(".game-screen", false);

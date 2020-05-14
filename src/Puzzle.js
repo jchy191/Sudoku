@@ -43,7 +43,6 @@ const Puzzle = (() => {
 
             let index = Math.floor(Math.random() * filledSpots.length);
             let {row, col} = filledSpots[index];
-            console.log(filledSpots.length);
             let a = puzzle[row][col];
             puzzle[row][col] = 0;
             if (Solver.isWellDefined(puzzle)) {

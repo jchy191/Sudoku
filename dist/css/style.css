@@ -96,7 +96,6 @@ button {
     width: 90%;
     border: none;
     text-align: center;
-    background-color: red;
 }
 
 input[type="text"] {
@@ -108,6 +107,19 @@ input[type="text"] {
     position: relative;
     bottom: 4px;
     background-color: transparent;
+}
+
+.hint-added {
+    animation: blink 3s cubic-bezier(.13,.13,.91,.91);
+}
+
+@keyframes blink {
+    0% {
+        color: brown;
+    }
+    100% {
+        color: black;
+    }
 }
 
 .error {

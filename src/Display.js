@@ -51,6 +51,15 @@ const Display = (() => {
         cells.forEach(cell => cell.classList.remove('error'));
     }
 
+    function addHint({row, col, value}) {
+        let cells = [...document.querySelectorAll(".small-grid-box")];
+        let cell = cells[row * 9 + col];
+        cell.innerHTML = "";
+        cell.appendChild(document.createElement("p"));
+        cell.firstChild.innerText = value;
+        cell.firstChild.classList.add('hint-added')
+    }
+
     function gameWon() {
         setVisibility(".win-screen", true);
     }
@@ -70,6 +79,7 @@ const Display = (() => {
         renderNumbers,
         highlightClashingCells,
         resetClashingCells,
+        addHint,
         gameWon,
         clearBoard,
         setVisibility

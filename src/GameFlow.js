@@ -38,7 +38,6 @@ const GameFlow = (() => {
     }
 
     function inputEntered(inputBox) {
-    
 
         let row = parseInt(inputBox.id.slice(0,1));
         let col = parseInt(inputBox.id.slice(1,2));
@@ -65,12 +64,9 @@ const GameFlow = (() => {
         }
         movesHistory.push({row: row, col: col, value: currentBoard[row][col]});
         currentBoard[row][col] = parseInt(inputBox.value);
-        
-        if (_checkWin(currentBoard)) {
+        if (_checkWin()) {
             _gameWon();
         }
-        
-
     }
 
     function undoInput() {
@@ -101,10 +97,9 @@ const GameFlow = (() => {
         let hint = emptySpots[Math.floor(Math.random() * emptySpots.length)];
         currentBoard[hint.row][hint.col] = hint.value;
 
-        let cells = [...document.querySelectorAll(".small-grid-box")];
-        cells[hint.row * 9 + hint.col].lastChild.value = hint.value;
+        Display.addHint(hint);
 
-        if (_checkWin(currentBoard)) {
+        if (_checkWin()) {
             _gameWon();
         }
     }   
@@ -117,10 +112,29 @@ const GameFlow = (() => {
         giveHint
     }
 
-    function _checkWin(board){
-        for (let i = 0; i < 9; i++) 
-            for (let j = 0; j < 9; j++) 
-                if (board[i][j] == 0) return false
+    function _checkWin(){
+
+        for (let i = 0; i < 9; i++) {
+            let set = new Set(currentBoard[i]);
+            if (set.has(0)) return false;
+            if (set.size !== 9) return false;
+        }
+        for (let j = 0; j < 9; j++) {
+            let set = new Set([currentBoard[0][j], currentBoard[1][j], currentBoard[2][j],
+                currentBoard[3][j], currentBoard[4][j], currentBoard[5][j],
+                currentBoard[6][j], currentBoard[7][j], currentBoard[8][j]]);
+            if (set.has(0)) return false;
+            if (set.size !== 9) return false;
+        }
+
+        for (let i = 0; i < 9; i += 3)
+            for (let j = 0; j < 9; j += 3) {
+                let set = new Set([currentBoard[i][j], currentBoard[i + 1][j], currentBoard[i + 2][j],
+                    currentBoard[i][j + 1], currentBoard[i + 1][j + 1], currentBoard[i + 2][j + 1],
+                    currentBoard[i][j + 2], currentBoard[i + 1][j + 2], currentBoard[i + 2][j + 2]]);
+                if (set.size !== 9) return false;
+            }
+
         return true;
     }
 
