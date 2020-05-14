@@ -80,8 +80,8 @@ const GameFlow = (() => {
         /*Checks that the "last move" obtained from movesHistory has not been corrected by a hint (i.e. the last 
         move is not equal to solution & the relevant cell is still a normal input box) */
         do {
-            lastMove = movesHistory.pop();
             if (movesHistory.length === 0) return;
+            lastMove = movesHistory.pop();
 
         } while (currentBoard[lastMove.row][lastMove.col] === solution[lastMove.row][lastMove.col] &&
              !(cells[lastMove.row * 9 + lastMove.col].lastChild.classList.contains("sudoku-input")))

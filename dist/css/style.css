@@ -110,7 +110,7 @@ button {
 
 .small-grid-box p {
     font-size: 32px;
-    font-family: Helvetica, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, Geneva, Verdana, sans-serif;
     font-weight: 500;
     margin: 16px;
 }
@@ -123,12 +123,12 @@ button {
 
 input[type="text"] {
     font-size: 32px;
-    font-family: Helvetica, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, Geneva, Verdana, sans-serif;
     font-weight: 500;
     color: rgb(189, 38, 38);
     padding: 0%;
     position: relative;
-    bottom: 3px;
+    bottom: 2px;
     background-color: transparent;
 }
 
@@ -244,7 +244,7 @@ input[type="text"] {
         font-size: 20px;
         padding: 0%;
         position: relative;
-        bottom: 2px;
+        bottom: 1px;
         background-color: transparent;
     }
     
