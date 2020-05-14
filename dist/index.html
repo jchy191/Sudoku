@@ -38,7 +38,10 @@
 
   <section class="game-screen">
 
-    <button id="main-menu-button">Main Menu</button>
+    <div class="top-bar">
+      <button id="main-menu-button">Main Menu</button>
+      <p id="stopwatch">Time elapsed <span id="clock">0:00</span></p>
+    </div>
 
     <div class="game-container">
       <div></div>
@@ -50,10 +53,11 @@
       <p>Congratulations you have completed the puzzle!</p>
     </div>
     
-    <button id="reset-button">Reset</button>
-    <button id="undo-button">Undo</button>
-    <button id="hints-button">Need help?</button>
-
+    <div class="bottom-bar">
+      <button id="reset-button">Reset</button>
+      <button id="undo-button">Undo</button>
+      <button id="hints-button">Need help?</button>
+    </div>
 
   </section>
 

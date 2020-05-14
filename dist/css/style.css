@@ -57,6 +57,20 @@ button {
     margin: 30px 20px 30px 20px;
 }
 
+.top-bar p{
+    position: relative;
+    float: right;
+    font-size: 24px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 40px 30px 30px 0px;
+}
+
+.top-bar::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
 .game-container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -105,12 +119,12 @@ input[type="text"] {
     color: brown;
     padding: 0%;
     position: relative;
-    bottom: 4px;
+    bottom: 3px;
     background-color: transparent;
 }
 
 .hint-added {
-    animation: blink 3s cubic-bezier(.13,.13,.91,.91);
+    animation: blink 2s cubic-bezier(.98,.04,.91,.58);
 }
 
 @keyframes blink {
@@ -192,13 +206,18 @@ input[type="text"] {
         margin: 30px 20px 30px 15px;
     }
 
+    .top-bar p{
+        margin: 34px 20px 30px 0px;
+        font-size: 15px;
+    }
+
     .game-board {
         width: 430px;
         height: 430px;
     }
 
     .small-grid-box p {
-        font-size: 22px;
+        font-size: 20px;
         margin: 12px;
     }
 

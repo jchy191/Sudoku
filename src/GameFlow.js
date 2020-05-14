@@ -2,7 +2,6 @@ import Display from './Display'
 import Puzzle from './Puzzle'
 import Solver from './Solver'
 import _ from 'lodash';
-import $ from 'jquery'
 
 
 const GameFlow = (() => {

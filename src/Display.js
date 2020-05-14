@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const Display = (() => {
 
     function createGrid() {
@@ -13,7 +15,6 @@ const Display = (() => {
                 smallCell.appendChild(document.createElement("p"));
             }
         
-
         for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++) {
                 let mediumCell = document.createElement("div");
@@ -47,8 +48,7 @@ const Display = (() => {
     }
 
     function resetClashingCells() {
-        let cells = [...document.querySelectorAll(".small-grid-box")];
-        cells.forEach(cell => cell.classList.remove('error'));
+        $(".small-grid-box").removeClass('error');
     }
 
     function addHint({row, col, value}) {
@@ -65,14 +65,15 @@ const Display = (() => {
     }
 
     function clearBoard() {
-        const grid = document.querySelector(".game-board");
-        grid.innerHTML="";
+        $(".game-board").empty();
     }
 
     function setVisibility(selector, visible) {
-        document.querySelector(selector).style.display = visible ? 'block' : 'none';
+        if (visible)
+            $(`${selector}`).css("display", "block");
+        if (!visible)
+            $(`${selector}`).css("display", "none");
     }
-
 
     return {
         createGrid,
@@ -87,11 +88,13 @@ const Display = (() => {
 
 
     function _createTextEntry(container, i, j) {
+
         let inputTextbox = document.createElement("input");
         inputTextbox.setAttribute("type", "text");
+        inputTextbox.setAttribute("pattern", "[1-9]");
+        inputTextbox.setAttribute("inputmode", "numeric");
         inputTextbox.setAttribute("maxlength", "1");
         inputTextbox.setAttribute("size", "1");
-        inputTextbox.setAttribute("patter", "[1-9]")
         inputTextbox.id = `${i}${j}`;
         inputTextbox.className = "sudoku-input";
         container.appendChild(inputTextbox);
