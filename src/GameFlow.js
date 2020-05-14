@@ -86,15 +86,15 @@ const GameFlow = (() => {
     function giveHint() {
         Display.resetClashingCells();
 
-        let emptySpots = [];
+        let wrongSpots = [];
         for (let i = 0; i < 9; i++)
             for (let j = 0; j < 9; j++)
-                if (currentBoard[i][j] === 0)
-                    emptySpots.push({row: i, col: j, value: solution[i][j]})
+                if (currentBoard[i][j] !== solution[i][j])
+                    wrongSpots.push({row: i, col: j, value: solution[i][j]})
         
-        if (emptySpots.length === 0) return;
+        if (wrongSpots.length === 0) return;
 
-        let hint = emptySpots[Math.floor(Math.random() * emptySpots.length)];
+        let hint = wrongSpots[Math.floor(Math.random() * wrongSpots.length)];
         currentBoard[hint.row][hint.col] = hint.value;
 
         Display.addHint(hint);
