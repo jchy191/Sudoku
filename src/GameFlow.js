@@ -73,10 +73,20 @@ const GameFlow = (() => {
         if (movesHistory.length === 0) return;
 
         Display.resetClashingCells();
-        let lastMove = movesHistory.pop();
-        currentBoard[lastMove.row][lastMove.col] = lastMove.value;
-
+        
         let cells = [...document.querySelectorAll(".small-grid-box")];
+        let lastMove;
+        
+        /*Checks that the "last move" obtained from movesHistory has not been corrected by a hint (i.e. the last 
+        move is not equal to solution & the relevant cell is still a normal input box) */
+        do {
+            lastMove = movesHistory.pop();
+            if (movesHistory.length === 0) return;
+
+        } while (currentBoard[lastMove.row][lastMove.col] === solution[lastMove.row][lastMove.col] &&
+             !(cells[lastMove.row * 9 + lastMove.col].lastChild.classList.contains("sudoku-input")))
+        
+        currentBoard[lastMove.row][lastMove.col] = lastMove.value;
         if (lastMove.value === 0) 
             cells[lastMove.row * 9 + lastMove.col].lastChild.value = "";
         if (lastMove.value !== 0) 
@@ -86,15 +96,17 @@ const GameFlow = (() => {
     function giveHint() {
         Display.resetClashingCells();
 
-        let emptySpots = [];
+        let wrongSpots = [];
         for (let i = 0; i < 9; i++)
             for (let j = 0; j < 9; j++)
-                if (currentBoard[i][j] === 0)
-                    emptySpots.push({row: i, col: j, value: solution[i][j]})
+                if (currentBoard[i][j] !== solution[i][j])
+                    wrongSpots.push({row: i, col: j, value: solution[i][j]})
+                
         
-        if (emptySpots.length === 0) return;
+        if (wrongSpots.length === 0) return;
 
-        let hint = emptySpots[Math.floor(Math.random() * emptySpots.length)];
+        let hint = wrongSpots[Math.floor(Math.random() * wrongSpots.length)];
+        
         currentBoard[hint.row][hint.col] = hint.value;
 
         Display.addHint(hint);
