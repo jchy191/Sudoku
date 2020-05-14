@@ -2,7 +2,7 @@
 
 This is the main project that I would like to showcase. This is a simple game of Sudoku that I wrote recently, using Object-Oriented Programming principles to help organise my code. The source files can be found in the "src" folder, while the files required to run the game in a browser can be found in the "dist" folder. 
 
-Alternatively, the project can be viewed in browser here: tinyurl.com/mysudokuproject
+Alternatively, the project can be viewed in browser here: https://tinyurl.com/mysudokuproject
 
 One thing that I have been working on is improving the readability and organisation of my code. I refactored my code a few times in hopes of achieving this.
 
