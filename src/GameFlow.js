@@ -2,6 +2,7 @@ import Display from './Display'
 import Puzzle from './Puzzle'
 import Solver from './Solver'
 import _ from 'lodash';
+import $ from 'jquery'
 
 
 const GameFlow = (() => {
@@ -23,9 +24,8 @@ const GameFlow = (() => {
         currentBoard = _.cloneDeep(initialBoard);
         movesHistory = [];
 
-        const grid = document.querySelector(".game-board");
-        grid.innerHTML="";
-        Display.createGrid(grid);
+        Display.clearBoard();
+        Display.createGrid();
         Display.renderNumbers(currentBoard);
         Display.resetClashingCells();
 
@@ -129,7 +129,7 @@ const GameFlow = (() => {
 
         const grid = document.querySelector(".game-board");
         grid.innerHTML="";
-        Display.createGrid(grid);
+        Display.createGrid();
         Display.renderNumbers(currentBoard);
 
         movesHistory = [];

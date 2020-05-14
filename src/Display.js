@@ -1,6 +1,7 @@
 const Display = (() => {
 
-    function createGrid(container) {
+    function createGrid() {
+        const container = document.querySelector('.game-board');
         let c = 0;
         for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
@@ -38,9 +39,9 @@ const Display = (() => {
     function highlightClashingCells(clashes) {
         let cells = [...document.querySelectorAll(".small-grid-box")];
         clashes.forEach(clash => {
-            let xRow = parseInt(clash.slice(0,1));
-            let xCol = parseInt(clash.slice(1,2));
-            let indexOfClashingCell = xRow * 9 + xCol;
+            let row = parseInt(clash.slice(0,1));
+            let col = parseInt(clash.slice(1,2));
+            let indexOfClashingCell = row * 9 + col;
             cells[indexOfClashingCell].classList.add('error');
         })
     }
@@ -54,6 +55,11 @@ const Display = (() => {
         setVisibility(".win-screen", true);
     }
 
+    function clearBoard() {
+        const grid = document.querySelector(".game-board");
+        grid.innerHTML="";
+    }
+
     function setVisibility(selector, visible) {
         document.querySelector(selector).style.display = visible ? 'block' : 'none';
     }
@@ -65,6 +71,7 @@ const Display = (() => {
         highlightClashingCells,
         resetClashingCells,
         gameWon,
+        clearBoard,
         setVisibility
     }
 

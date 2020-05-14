@@ -23,7 +23,7 @@ const Puzzle = (() => {
         const puzzle = _.cloneDeep(solution);
         let i = 0;
         let n;
-        let maxIterations = 90;
+        let maxIterations = 85;
         let filledSpots = [];
         for (let i = 0; i < 9; i++)
             for (let j = 0; j < 9; j++)
@@ -36,7 +36,7 @@ const Puzzle = (() => {
             n = Math.floor(Math.random() * 3) + 45;
 
         if (difficulty === "hard")
-            n = Math.floor(Math.random() * 0) + 60;
+            n = 56;
 
         while(i < n) {
             if (maxIterations-- <= 0) break;

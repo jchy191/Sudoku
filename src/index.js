@@ -16,15 +16,30 @@ $("#new-game-medium").mousedown(function() {
 })
 
 $("#new-game-hard").mousedown(function() {
-    GameFlow.newGame("hard");
     Display.setVisibility(".menu-screen", false);
-    Display.setVisibility(".game-screen", true);
+    Display.setVisibility(".loading-screen", true);
+   
+    let generatingPuzzle = setInterval(function(){
+        GameFlow.newGame("hard");
+        if ($(".game-board").children().length > 0) {
+            Display.setVisibility(".game-screen", true);
+            Display.setVisibility(".loading-screen", false);
+            clearInterval(generatingPuzzle);
+        }
+    }, 100);
 })
+
+
+
+
+
+
 
 $("#main-menu-button").mousedown(function(){
     Display.setVisibility(".menu-screen", true);
     Display.setVisibility(".game-screen", false);
     Display.setVisibility(".win-screen", false);
+    Display.clearBoard();
 })
 
 $("#reset-button").mousedown(function(){

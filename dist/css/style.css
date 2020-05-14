@@ -1,5 +1,5 @@
 header {
-    background-color: rgba(34, 139, 34, 0.8);
+    background-color: rgba(34, 139, 34, 0.9);
     text-align: center;
     padding: 20px;
 }
@@ -7,11 +7,11 @@ header {
 h1 {
     font-size: 40px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 body {
-    background-color: rgba(152, 251, 152, 0.3);
+    background-color: rgba(139, 245, 139, 0.281);
 }
 
 button {
@@ -117,7 +117,18 @@ input[type="text"] {
 
 .win-screen {
     display: none;
+    width: 610px;
+    height: 100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -305px;
+    margin-top: -30px;
     background-color: rgba(34, 139, 34, 0.9);
+}
+
+.loading-screen {
+    display: none;
     width: fit-content;
     height: fit-content;
     position: fixed;
@@ -126,17 +137,25 @@ input[type="text"] {
     right: 0;
     top: 40%;
     padding: 0px 20px 0px 20px;
+    background-color: rgba(34, 139, 34, 0.75);
 }
 
 .win-screen p{
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 10px 20px 10px 20px;
+}
+
+.loading-screen p{
     font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 30px 0px 30px 0px;
 }
 
-.loading-screen {
-    display: none;
-}
+
+
 
 
 
@@ -179,6 +198,13 @@ input[type="text"] {
         bottom: 2px;
         background-color: transparent;
     }
+
+    .win-screen {
+        width: 430px;
+        margin-top: -110px;
+        margin-left: -215px;
+    }
+
 }
 
 
@@ -196,10 +222,48 @@ input[type="text"] {
 
     input[type="text"] {
         font-size: 18px;
-        color: brown;
-        padding: 0%;
-        position: relative;
-        bottom: 2px;
-        background-color: transparent;
+    }
+
+    .win-screen {
+        width: 366px;
+        margin-top: -130px;
+        margin-left: -183px;
+    }
+
+    .win-screen p{
+        line-height: 30px;
+        font-size: 20px;
+        margin: 20px 40px 20px 40px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+    .game-board {
+        width: 300px;
+        height: 300px;
+    }
+
+    .small-grid-box p {
+        font-size: 16px;
+        margin: 7px;
+    }
+
+    input[type="text"] {
+        font-size: 16px;
+        bottom: 1px;
+    }
+
+    .win-screen {
+        width: 300px;
+        height: 80px;
+        margin-top: -150px;
+        margin-left: -150px;
+    }
+
+    .win-screen p{
+        line-height: 30px;
+        font-size: 20px;
+        margin: 10px 20px 10px 20px;
     }
 }
