@@ -23,6 +23,11 @@ const Puzzle = (() => {
         const puzzle = _.cloneDeep(solution);
         let i = 0;
         let n;
+        let maxIterations = 90;
+        let filledSpots = [];
+        for (let i = 0; i < 9; i++)
+            for (let j = 0; j < 9; j++)
+                filledSpots.push({row: i, col: j});
 
         if (difficulty === "easy")
             n = Math.floor(Math.random() * 3) + 38;
@@ -31,28 +36,30 @@ const Puzzle = (() => {
             n = Math.floor(Math.random() * 3) + 45;
 
         if (difficulty === "hard")
-            n = Math.floor(Math.random() * 0) + 57;
+            n = Math.floor(Math.random() * 0) + 60;
 
         while(i < n) {
-            let row = Math.floor(Math.random() * 9);
-            let col = Math.floor(Math.random() * 9);
-            if (puzzle[row][col] !== 0) {
-                let a = puzzle[row][col];
-                puzzle[row][col] = 0;
-                if (Solver.isWellDefined(puzzle)) {
-                    i++;
-                    continue;
-                }
-                puzzle[row][col] = a;
+            if (maxIterations-- <= 0) break;
+
+            let index = Math.floor(Math.random() * filledSpots.length);
+            let {row, col} = filledSpots[index];
+            console.log(filledSpots.length);
+            let a = puzzle[row][col];
+            puzzle[row][col] = 0;
+            if (Solver.isWellDefined(puzzle)) {
+                i++;
+                filledSpots.splice(index, 1);
+                continue;
             }
+            puzzle[row][col] = a;
+            
         }
         return puzzle;
     }
 
     return {
         createPuzzle,
-        createBlanks,
-        //createHardPuzzle
+        createBlanks
     }
 
     function _randomiseColumns(board) {
