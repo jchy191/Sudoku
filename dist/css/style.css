@@ -229,27 +229,28 @@ input[type="text"] {
         font-size: 15px;
     }
 
-    .pause-screen p{
-        font-size: 15px;
-        margin: 10px 40px 40px 40px;
-    }
     
     .game-board {
         width: 430px;
         height: 430px;
     }
-
+    
     .small-grid-box p {
         font-size: 20px;
         margin: 12px;
     }
-
+    
     input[type="text"] {
         font-size: 20px;
         padding: 0%;
         position: relative;
         bottom: 2px;
         background-color: transparent;
+    }
+    
+    .pause-screen p{
+        font-size: 15px;
+        margin: 10px 40px 40px 40px;
     }
 
     .win-screen {
@@ -298,6 +299,10 @@ input[type="text"] {
         height: 300px;
     }
 
+    .top-bar p{
+        font-size: 10px;
+    }
+
     .small-grid-box p {
         font-size: 16px;
         margin: 7px;
@@ -306,6 +311,11 @@ input[type="text"] {
     input[type="text"] {
         font-size: 16px;
         bottom: 1px;
+    }
+
+    .pause-screen p{
+        font-size: 12x;
+        margin: 0px 40px 40px 40px;
     }
 
     .win-screen {
@@ -319,15 +329,6 @@ input[type="text"] {
         line-height: 30px;
         font-size: 20px;
         margin: 10px 20px 10px 20px;
-    }
-
-    .top-bar p{
-        font-size: 10px;
-    }
-
-    .pause-screen p{
-        font-size: 12x;
-        margin: 0px 40px 40px 40px;
     }
 
 }

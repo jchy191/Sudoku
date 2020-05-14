@@ -36,7 +36,7 @@ const Puzzle = (() => {
             n = Math.floor(Math.random() * 3) + 45;
 
         if (difficulty === "hard")
-            n = 56;
+            n = 55;
 
         while(i < n) {
             if (maxIterations-- <= 0) break;
