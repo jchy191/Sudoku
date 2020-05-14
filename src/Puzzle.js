@@ -1,4 +1,4 @@
-import Solver from './Solver'
+import Solver from './Solver';
 import _ from 'lodash';
 
 const Puzzle = (() => {

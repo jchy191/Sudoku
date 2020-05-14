@@ -1,29 +1,20 @@
 import GameFlow from './GameFlow';
 import Display from './Display';
+import Stopwatch from './Stopwatch';
 import $ from 'jquery';
-import Stopwatch from 'timer-stopwatch'
-
-let stopwatch = new Stopwatch(0,{refreshRateMS: 1000, almostDoneMS: 0});
-stopwatch.onTime(function(time){
-    let min = Math.floor(time.ms / 60000);
-    let sec = Math.floor(time.ms / 1000) - min * 60;
-    if (sec.toString().length == 1)
-        sec = "0" + sec;
-    $("#clock").text(`${min}:${sec}`);
-})
 
 $("#new-game-easy").mousedown(function() {
     GameFlow.newGame("easy");
     Display.setVisibility(".menu-screen", false);
     Display.setVisibility(".game-screen", true);
-    stopwatch.start();
+    Stopwatch.start();
 })
 
 $("#new-game-medium").mousedown(function() {
     GameFlow.newGame("med");
     Display.setVisibility(".menu-screen", false);
     Display.setVisibility(".game-screen", true);  
-    stopwatch.start();  
+    Stopwatch.start();  
 })
 
 $("#new-game-hard").mousedown(function() {
@@ -35,7 +26,7 @@ $("#new-game-hard").mousedown(function() {
         if ($(".game-board").children().length > 0) {
             Display.setVisibility(".game-screen", true);
             Display.setVisibility(".loading-screen", false);
-            stopwatch.start();
+            Stopwatch.start();
             clearInterval(generatingPuzzle);
         }
     }, 100);
@@ -44,20 +35,38 @@ $("#new-game-hard").mousedown(function() {
 $("#main-menu-button").mousedown(function(){
     Display.setVisibility(".menu-screen", true);
     Display.setVisibility(".game-screen", false);
-    Display.setVisibility(".win-screen", false);
+    displayGameInterface();
+
     Display.clearBoard();
-    stopwatch.stop();
-    stopwatch.reset();
+    Stopwatch.stop();
+    Stopwatch.reset();
     $("#clock").text("0:00");
 })
 
+$("#pause-button").mousedown(function(){
+    Stopwatch.stop();
+    Display.setVisibility(".game-container", false);
+    Display.setVisibility("#pause-button", false);
+    Display.setVisibility("#reset-button", true);
+    Display.setVisibility("#undo-button", false);
+    Display.setVisibility("#hints-button", false);
+    Display.setVisibility("#play-button", true);
+    Display.setVisibility(".pause-screen", true);
+});
+
+$("#play-button").mousedown(function(){
+    Stopwatch.start();
+    displayGameInterface();
+});
+
 $("#reset-button").mousedown(function(){
-    Display.setVisibility(".win-screen", false)
     GameFlow.resetBoard();
-    stopwatch.stop();
-    stopwatch.reset();
+    displayGameInterface();
+
+    Stopwatch.stop();
+    Stopwatch.reset();
     $("#clock").text("0:00");
-    stopwatch.start();
+    Stopwatch.start();
 })
 
 $("#undo-button").mousedown(function(){
@@ -67,3 +76,15 @@ $("#undo-button").mousedown(function(){
 $("#hints-button").mousedown(function(){
     GameFlow.giveHint();
 });
+
+function displayGameInterface() {
+    Display.setVisibility("#pause-button", true);
+    Display.setVisibility("#play-button", false);
+    $("#reset-button").css("display", "inline-block");
+    $("#undo-button").css("display", "inline-block");
+    $("#hints-button").css("display", "inline-block");
+    $(".game-container").css("display", "grid");
+
+    Display.setVisibility(".win-screen", false);
+    Display.setVisibility(".pause-screen", false);
+}

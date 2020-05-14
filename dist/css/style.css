@@ -53,16 +53,25 @@ button {
     display: none;
 }
 
-#main-menu-button, #reset-button, #hints-button {
+#main-menu-button, #reset-button, #hints-button, #pause-button, #play-button {
     margin: 30px 20px 30px 20px;
+}
+
+#pause-button, #play-button {
+    position: relative;
+    float: right;
+}
+
+#play-button {
+    display: none;
 }
 
 .top-bar p{
     position: relative;
     float: right;
-    font-size: 24px;
+    font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin: 40px 30px 30px 0px;
+    margin: 35px 30px 30px 0px;
 }
 
 .top-bar::after {
@@ -116,7 +125,7 @@ input[type="text"] {
     font-size: 32px;
     font-family: Helvetica, Geneva, Verdana, sans-serif;
     font-weight: 500;
-    color: brown;
+    color: rgb(189, 38, 38);
     padding: 0%;
     position: relative;
     bottom: 3px;
@@ -124,12 +133,12 @@ input[type="text"] {
 }
 
 .hint-added {
-    animation: blink 2s cubic-bezier(.98,.04,.91,.58);
+    animation: blink 3s cubic-bezier(1,.02,.94,.64);
 }
 
 @keyframes blink {
     0% {
-        color: brown;
+        color: rgb(189, 38, 38);
     }
     100% {
         color: black;
@@ -139,18 +148,6 @@ input[type="text"] {
 .error {
     color: black;
     background-color: pink;
-}
-
-.win-screen {
-    display: none;
-    width: 610px;
-    height: 100px;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-left: -305px;
-    margin-top: -30px;
-    background-color: rgba(34, 139, 34, 0.9);
 }
 
 .loading-screen {
@@ -166,22 +163,43 @@ input[type="text"] {
     background-color: rgba(34, 139, 34, 0.75);
 }
 
-.win-screen p{
-    text-align: center;
-    line-height: 40px;
-    font-size: 30px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin: 10px 20px 10px 20px;
-}
-
 .loading-screen p{
     font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 30px 0px 30px 0px;
 }
 
+.pause-screen {
+    display: none;
+    line-height: 30px;
+}
 
+.pause-screen p{
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 30px 40px 60px 40px;
+    text-align: justify;
+}
 
+.win-screen {
+    display: none;
+    width: 610px;
+    height: 100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -305px;
+    margin-top: -30px;
+    background-color: rgba(34, 139, 34, 0.9);
+}
+
+.win-screen p{
+    text-align: justify;
+    line-height: 40px;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 10px 20px 10px 20px;
+}
 
 
 
@@ -207,10 +225,15 @@ input[type="text"] {
     }
 
     .top-bar p{
-        margin: 34px 20px 30px 0px;
+        margin: 34px 15px 30px 0px;
         font-size: 15px;
     }
 
+    .pause-screen p{
+        font-size: 15px;
+        margin: 10px 40px 40px 40px;
+    }
+    
     .game-board {
         width: 430px;
         height: 430px;
@@ -223,7 +246,6 @@ input[type="text"] {
 
     input[type="text"] {
         font-size: 20px;
-        color: brown;
         padding: 0%;
         position: relative;
         bottom: 2px;
@@ -266,6 +288,7 @@ input[type="text"] {
         font-size: 20px;
         margin: 20px 40px 20px 40px;
     }
+
 }
 
 @media only screen and (max-width: 370px) {
@@ -297,4 +320,14 @@ input[type="text"] {
         font-size: 20px;
         margin: 10px 20px 10px 20px;
     }
+
+    .top-bar p{
+        font-size: 10px;
+    }
+
+    .pause-screen p{
+        font-size: 12x;
+        margin: 0px 40px 40px 40px;
+    }
+
 }

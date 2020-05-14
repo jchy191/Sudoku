@@ -1,6 +1,7 @@
-import Display from './Display'
-import Puzzle from './Puzzle'
-import Solver from './Solver'
+import Display from './Display';
+import Puzzle from './Puzzle';
+import Solver from './Solver';
+import Stopwatch from './Stopwatch';
 import _ from 'lodash';
 
 
@@ -139,7 +140,8 @@ const GameFlow = (() => {
 
     function _gameWon() {
         Display.gameWon();
-
+        Stopwatch.stop();
+        Display.setVisibility("#pause-button", false);
         const grid = document.querySelector(".game-board");
         grid.innerHTML="";
         Display.createGrid();

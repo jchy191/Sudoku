@@ -4,6 +4,7 @@ const Display = (() => {
 
     function createGrid() {
         const container = document.querySelector('.game-board');
+
         let c = 0;
         for (let i = 0; i < 9; i++) 
             for (let j = 0; j < 9; j++) {
@@ -21,6 +22,7 @@ const Display = (() => {
                 container.appendChild(mediumCell).className = "medium-grid-box";
                 mediumCell.style.gridArea = `${i * 3 + 1}/${j * 3 + 1}/${(i + 1) * 3 + 1}/${(j + 1) * 3 + 1}`;
             }
+        
     }
 
     function renderNumbers(board) {
@@ -57,7 +59,11 @@ const Display = (() => {
         cell.innerHTML = "";
         cell.appendChild(document.createElement("p"));
         cell.firstChild.innerText = value;
-        cell.firstChild.classList.add('hint-added')
+        cell.firstChild.classList.add('hint-added');
+
+        setTimeout(function(){
+            cell.firstChild.classList.remove('hint-added');
+        }, 1000);
     }
 
     function gameWon() {

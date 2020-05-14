@@ -20,33 +20,37 @@
   
   
   <section class="menu-screen">
-    
     <h2>Sudoku Puzzle</h2>
-    
     <p>Ready to play a classic game of Sudoku? Select a difficulty level to begin!</p>
+    
     <button id="new-game-easy">Easy</button><br>
     <button id="new-game-medium">Medium</button><br>
     <button id="new-game-hard">Hard</button><br>
-
-    
-
   </section>
+
 
   <section class="loading-screen">
       <p>Generating puzzle... Thank you for your patience :) </p>
   </section>
 
-  <section class="game-screen">
 
+  <section class="game-screen">
     <div class="top-bar">
       <button id="main-menu-button">Main Menu</button>
-      <p id="stopwatch">Time elapsed <span id="clock">0:00</span></p>
+      <p id="stopwatch">Time elapsed: <span id="clock">0:00</span></p>
+      <button id="pause-button">Pause</button>
+      <button id="play-button">Play</button>
     </div>
 
     <div class="game-container">
       <div></div>
       <div class="game-board"></div>
       <div></div>
+    </div>
+
+    <div class="pause-screen">
+      <p>Press the "Play" button to continue or press the "Reset"
+        button to try again. Feel like giving up? Press the "Main Menu" button to quit.</p>
     </div>
 
     <div class="win-screen">
@@ -58,7 +62,6 @@
       <button id="undo-button">Undo</button>
       <button id="hints-button">Need help?</button>
     </div>
-
   </section>
 
   <script src="main.js"></script>
