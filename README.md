@@ -1,6 +1,6 @@
 # Sudoku
 
-This is the main project that I would like to showcase. This is a simple game of Sudoku that I wrote recently, using Object-Oriented Programming principles to help organise my code. The source files can be found in the "src" folder, while the files required to run the game in a browser can be found in the "dist" folder. The game can be run on mobile phones as well.
+This is the main project that I would like to showcase. This is a simple game of Sudoku that I wrote recently, using Object-Oriented Programming principles to help organise my code. The source files can be found in the "src" folder, while the files required to run the game in a browser can be found in the "dist" folder. The game can be run on mobile phones as well. 
 
 Alternatively, the project can be viewed in browser here: https://tinyurl.com/mysudokuproject
 
@@ -15,3 +15,6 @@ There are a few features that I hope to be able to add in the future. The main o
 After this project, I would like to learn more about asynchronous programming, as well as become more familiar with more git and webpack commands/features (e.g. git branching).
 
 Overall, building this game has been quite fun and rewarding, and I have definitely learnt quite a fair amount from the entire process.
+
+EDIT 19/05/2020:
+I just realised that there might be some CSS/formatting issues viewing this in Mozilla Firefox. For now, it is better to use Chrome to view the site.
