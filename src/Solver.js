@@ -4,7 +4,7 @@ const Solver = (() => {
 
     function findClashes({board, row, col, value}) {
         let clashes = new Set();
-
+        
         for (let i = 0; i < 9; i++) 
             if (board[i][col] === value) 
                 clashes.add(`${i}${col}`);
@@ -47,7 +47,8 @@ const Solver = (() => {
                             }
                         return;
                     }
-                solutions.push(_.cloneDeep(newBoard));
+            solutions.push(_.cloneDeep(newBoard));
+            return;
         }
 
         solve();

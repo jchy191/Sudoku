@@ -21,8 +21,8 @@ const Puzzle = (() => {
 
     function createBlanks({solution, difficulty}) {
         const puzzle = _.cloneDeep(solution);
-        let i = 0;
-        let n;
+        let currentBlanks = 0; 
+        let maxBlanks;
         let maxIterations = 80;
         let filledSpots = [];
         for (let i = 0; i < 9; i++)
@@ -30,15 +30,15 @@ const Puzzle = (() => {
                 filledSpots.push({row: i, col: j});
 
         if (difficulty === "easy")
-            n = Math.floor(Math.random() * 3) + 38;
+            maxBlanks = Math.floor(Math.random() * 3) + 38;
 
         if (difficulty === "med")
-            n = Math.floor(Math.random() * 3) + 45;
+            maxBlanks = Math.floor(Math.random() * 3) + 45;
 
         if (difficulty === "hard")
-            n = 55;
+            maxBlanks = 55;
 
-        while(i < n) {
+        while(currentBlanks < maxBlanks) {
             if (maxIterations-- <= 0) break;
 
             let index = Math.floor(Math.random() * filledSpots.length);
@@ -46,7 +46,7 @@ const Puzzle = (() => {
             let a = puzzle[row][col];
             puzzle[row][col] = 0;
             if (Solver.isWellDefined(puzzle)) {
-                i++;
+                currentBlanks++;
                 filledSpots.splice(index, 1);
                 continue;
             }

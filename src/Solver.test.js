@@ -100,5 +100,3 @@ test('isWellDefine method returns true if puzzle has one solution', () => {
 test('isWellDefine method returns false if puzzle has more than one solution', () => {
     expect(Solver.isWellDefined(test2)).toBeFalsy();
 })
-
-
