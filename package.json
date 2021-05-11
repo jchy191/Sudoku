@@ -28,7 +28,7 @@
     "eslint-plugin-jest": "^23.9.0",
     "jest": "^26.0.1",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "timer-stopwatch": "^0.2.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
